@@ -8,7 +8,7 @@ const photoSchema = new mongoose.Schema(
       max: 200,
       required: true,
     },
-    titile: {
+    title: {
       type: String,
       min: 1,
       max: 200,
@@ -19,21 +19,19 @@ const photoSchema = new mongoose.Schema(
       min: 1,
       required: false,
     },
-    createdAt: {
-      type: Date,
-      required: false,
-      default: Date.now,
-    },
     price: {
-      type: Double,
-      required: false,
-      default: 0.0,
-    },
-    rate: {
       type: Number,
-      min: 1,
-      max: 5,
-      default: 1,
+      required: false,
+      default: 0,
+    },
+    ratingSum: {
+      type: Number,
+      default: 0,
+      required: false,
+    },
+    ratingCount: {
+      type: Number,
+      default: 0,
       required: false,
     },
     user: {
@@ -43,4 +41,4 @@ const photoSchema = new mongoose.Schema(
   },
   { timestamps: true, strict: true },
 );
-module.exports = mongoose.model("photo", photo, "photos");
+module.exports = mongoose.model("photo", photoSchema, "photos");
