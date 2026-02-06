@@ -1,4 +1,3 @@
-const { response } = require("express");
 const userService = require("./user.service");
 
 const findAll = async (req, res) => {
@@ -86,10 +85,37 @@ const findOne = async (req, res) => {
   }
 };
 
+const uploadFile = async (req, res, next) => {
+  try {
+    const img = req.file.path;
+
+    res.status(200).json({ img: img });
+  } catch (error) {
+    next(e);
+  }
+};
+
+const uploadFileOnCloudByIdUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const img = req.file.path;
+    const post = await userService.updateUser(id, { photo: img });
+
+    res.status(200).send({
+      statusCode: 200,
+      post,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   findAll,
   createUser,
   deleteById,
   updateUserById,
   findOne,
+  uploadFileOnCloudByIdUser,
+  uploadFile,
 };

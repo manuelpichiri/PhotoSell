@@ -15,13 +15,14 @@ server.use(
 
 //routes import
 const userRoute = require("./modules/user/user.route");
-
+const photoRoute = require("./modules/photo/photo.route");
+const authRoute = require("./modules/auth/auth.route");
 //middlewares imports
 
 //middlewares
 
 //route
-
+server.use("/", authRoute);
 server.use("/", userRoute);
-
+server.use("/", photoRoute);
 startServer(port, server);

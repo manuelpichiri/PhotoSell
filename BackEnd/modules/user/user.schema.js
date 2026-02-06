@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       enum: ["admin", "user", "company"],
-      default: user,
+      default: "user",
     },
     country: {
       type: String,
@@ -64,4 +64,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true, strict: true },
 );
 
-module.exports = mongoose.model("user", user, "users");
+module.exports = mongoose.model("user", userSchema, "users");
