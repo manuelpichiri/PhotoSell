@@ -17,12 +17,18 @@ server.use(
 const userRoute = require("./modules/user/user.route");
 const photoRoute = require("./modules/photo/photo.route");
 const authRoute = require("./modules/auth/auth.route");
+const recoverPasswordRoute = require("./modules/recoverPassword/recoverPassowrd.route");
+const oauthGoogleRoute = require("./modules/oauthGoogle/oautGoogle.route");
 //middlewares imports
-
+const errorHandler = require("./middlewares/errorHandler/errorHandler");
 //middlewares
 
 //route
+server.use("/", oauthGoogleRoute);
+server.use("/", recoverPasswordRoute);
 server.use("/", authRoute);
 server.use("/", userRoute);
 server.use("/", photoRoute);
+
+server.use(errorHandler);
 startServer(port, server);

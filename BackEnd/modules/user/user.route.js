@@ -12,7 +12,9 @@ user.post(
   cloudUpload.single("photo"),
   userController.uploadFile,
 );
-
+//recover password
+//richiama il controller e il serivizio che: controlla che la mail esista se la mail esiste genera un token che vale 5 min
+//invia la mail contentente il link con query string (all'interno il token) es https://miosito.com/recoverpassword?token=a213sdawdaw
 user.delete("/user/:id", userController.deleteById);
 
 user.patch("/user/:id", userController.updateUserById);
@@ -24,3 +26,5 @@ user.patch(
 );
 
 module.exports = user;
+
+//utilizzare express validator

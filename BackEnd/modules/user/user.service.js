@@ -1,11 +1,8 @@
 const userSchema = require("./user.schema");
-const bcrypt = require("bcrypt");
 
 const createUser = async (body) => {
-  const saltRounds = 15;
   const newUser = new userSchema({
-    ...body,
-    password: await bcrypt.hash(body.password, saltRounds),
+    body,
   });
 
   const savedUser = await newUser.save();
@@ -29,7 +26,13 @@ const getSingleUser = async (id) => {
 };
 
 const updateUser = async (id, body) => {
-  const user = await userSchema.findByIdAndUpdate(id, body, { new: true });
+  const user = await userSchema.findByIdAndUpdate(
+    id,
+    body,
+
+    { new: true },
+  );
+
   return {
     statusCode: 200,
     user,
