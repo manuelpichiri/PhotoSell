@@ -1,4 +1,8 @@
 const userService = require("./user.service");
+const EmailService = require("../mail/mail.service");
+const bcrypt = require("bcrypt");
+const passwordException = require("../../exceptions/passwordUpdateException");
+const email = new EmailService();
 
 const findAll = async (req, res) => {
   try {
@@ -24,7 +28,8 @@ const createUser = async (req, res) => {
   try {
     const { body } = req;
     const user = await userService.createUser(body);
-    res.status(200).send({
+    await email.send(body.email, "Test prova nodemailer", "Welcome on board");
+    await res.status(200).send({
       statusCode: 200,
       user,
     });
