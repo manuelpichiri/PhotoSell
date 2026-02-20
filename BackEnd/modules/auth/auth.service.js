@@ -15,11 +15,14 @@ const login = async (body) => {
   if (!passwordIsValid) {
     throw new invalidPassword("password is invalid");
   }
+
   const token = JWT.sign(
     {
+      id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       country: user.country,
+      role: user.role,
     },
     process.env.JWT_SECRET,
     { expiresIn: "1h" },

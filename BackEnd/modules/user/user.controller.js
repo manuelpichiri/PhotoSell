@@ -7,7 +7,7 @@ const email = new EmailService();
 const findAll = async (req, res) => {
   try {
     const users = await userService.getUsers();
-    if (users.lenght === 0) {
+    if (users.length === 0) {
       return res.status(404).send({
         statusCode: 404,
         message: "No user found",
@@ -28,15 +28,15 @@ const createUser = async (req, res) => {
   try {
     const { body } = req;
     const user = await userService.createUser(body);
-    await email.send(body.email, "Test prova nodemailer", "Welcome on board");
-    await res.status(200).send({
+    await email.send(user.email, "Test prova nodemailer", "Welcome on board");
+    return res.status(200).send({
       statusCode: 200,
       user,
     });
   } catch (error) {
     res.status(500).send({
       statusCode: 500,
-      message: "an error during the request createUser",
+      message: error.message,
     });
   }
 };
@@ -85,7 +85,7 @@ const findOne = async (req, res) => {
   } catch (error) {
     res.status(500).send({
       statusCode: 500,
-      message: "an error during the request updateUserById",
+      message: "an error during the request findone",
     });
   }
 };
@@ -102,15 +102,13 @@ const uploadFile = async (req, res, next) => {
 
 const uploadFileOnCloudByIdUser = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const img = req.file.path;
-    const post = await userService.updateUser(id, { photo: img });
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
 
-    res.status(200).send({
-      statusCode: 200,
-      post,
-    });
+    res.status(200).json({ image: req.file.path });
   } catch (error) {
+    console.log(error.message);
     next(error);
   }
 };

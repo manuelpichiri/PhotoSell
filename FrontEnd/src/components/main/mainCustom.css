@@ -1,0 +1,44 @@
+.bg-color-custom-main {
+  background: #f2ba6b;
+  background: linear-gradient(
+    94deg,
+    rgba(242, 186, 107, 0.72) 0%,
+    rgba(255, 223, 128, 0.8) 0%
+  );
+}
+
+.li-custom-main {
+  border-bottom: solid 1px;
+  border-color: black;
+  list-style-type: none;
+}
+
+.link-custom-main {
+  color: black;
+  font-size: 30px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.h1-custom-main {
+  font-weight: bolder;
+  font-size: 70px;
+}
+
+.img-custom-main {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.div-custom-p {
+  border-radius: 10px;
+  border: solid black 1px;
+}
+
+@media screen and (max-width: 425px) {
+  .h1-custom-main {
+    font-size: 40px;
+  }
+}

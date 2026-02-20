@@ -1,0 +1,13 @@
+.search-button-custom {
+  border: none;
+  border-radius: 10px;
+  background-color: coral;
+}
+
+.search-bar {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 10px;
+  outline: none;
+}

@@ -6,5 +6,9 @@ recoverPassword.post(
   "/recover-password",
   recoverPasswordController.recoverPasswordUser,
 );
+recoverPassword.post(
+  "/reset-password",
+  recoverPasswordController.resetPasswordUser,
+);
 
 module.exports = recoverPassword;

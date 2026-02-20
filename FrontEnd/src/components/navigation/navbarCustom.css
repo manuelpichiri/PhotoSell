@@ -1,0 +1,19 @@
+* {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+.nav-custom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.text-custom {
+  font-weight: 500;
+  font-size: large;
+  color: white;
+}
+
+.text-custom:hover {
+  color: #c16532;
+}

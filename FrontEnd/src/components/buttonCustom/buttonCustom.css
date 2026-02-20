@@ -1,0 +1,21 @@
+.border-custom {
+  border-radius: 30px;
+  width: 150px;
+  height: 40px;
+  border: none;
+  background-color: #c16532;
+}
+.position-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+
+.text-size {
+  font-size: medium;
+}
+
+.border-custom:hover {
+  background-color: rgb(100, 66, 19);
+}

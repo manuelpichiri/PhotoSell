@@ -1,0 +1,21 @@
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fontsource/plus-jakarta-sans";
+import "./index.css";
+import { UserProvider } from "../context/userContext.jsx";
+import { PhotoProvider } from "../context/photoContext.jsx";
+import App from "./App.jsx";
+import { CartProvider } from "../context/cartContext.jsx";
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <CartProvider>
+      <UserProvider>
+        <PhotoProvider>
+          <App />
+        </PhotoProvider>
+      </UserProvider>
+    </CartProvider>
+  </StrictMode>,
+);

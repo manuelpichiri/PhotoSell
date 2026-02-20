@@ -1,0 +1,55 @@
+.row-custom-userpage {
+  position: relative;
+}
+
+.div-avatar-img-userpage {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: white solid 5px;
+}
+
+.img-userpage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.img-hero-userpage {
+  object-fit: cover;
+  width: 100%;
+  height: 400px;
+}
+
+.div-position-userpage {
+  position: absolute;
+  top: 60%;
+  left: 0%;
+}
+.edit-modal-position {
+  position: absolute;
+  top: 67%;
+  right: -35%;
+}
+
+p {
+  margin: 0;
+}
+
+.h3-userpage-custom {
+  border-bottom: 1px solid;
+  border-color: grey;
+}
+
+.div-button-edit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.contanier-userpage-custom {
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}

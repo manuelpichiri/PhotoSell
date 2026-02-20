@@ -1,0 +1,23 @@
+import "./registration.css";
+import FormRegistration from "../registrationForm/RegistrationForm";
+import { Container, Row, Col } from "react-bootstrap";
+const Registration = () => {
+  return (
+    <div className="w-100 div-prova d-flex align-items-center justify-content-center">
+      <Container className="container-custom m-0 p-0 div-prova ">
+        <Row className="m-0 p-0  bg-dark container-row  align-items-center">
+          <Col xs={12} md={6} className="h-100 m-0 p-0">
+            <img
+              src="../../../public/6432e2c18d0197001d05e928.jpg"
+              className="img-custom-registration w-100   rounded-4"
+            ></img>
+          </Col>
+          <Col xs={12} md={6}>
+            <FormRegistration />
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
+};
+export default Registration;

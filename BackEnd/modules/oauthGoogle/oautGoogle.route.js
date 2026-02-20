@@ -1,17 +1,17 @@
 const express = require("express");
 const oauth = express.Router();
 const passport = require("passport");
-const oauthController = require("./oauthGoogle.controller");
+const oauthGoogleController = require("./oautGoogle.controller");
 
 oauth.get(
   "/google",
   passport.authenticate("google", { scope: ["profile"] }),
-  oauthController.auth,
+  oauthGoogleController.auth,
 );
 oauth.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
-  oauthController.manageOauthCallback,
+  oauthGoogleController.manageOauthCallback,
 );
 
 module.exports = oauth;

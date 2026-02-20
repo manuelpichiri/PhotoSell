@@ -1,0 +1,11 @@
+.input-custom {
+  padding: 12px;
+  border: none;
+  background-color: rgb(221, 221, 221);
+  border-radius: 5px;
+  width: 55%;
+}
+.label-custom {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.732);
+}

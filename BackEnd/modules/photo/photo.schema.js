@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const photoSchema = new mongoose.Schema(
   {
+    image: {
+      type: String,
+      required: true,
+    },
     category: {
       type: String,
       min: 1,
@@ -10,8 +14,8 @@ const photoSchema = new mongoose.Schema(
     },
     title: {
       type: String,
-      min: 1,
-      max: 200,
+      minLength: 1,
+      maxLength: 200,
       required: true,
     },
     description: {

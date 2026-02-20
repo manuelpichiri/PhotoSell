@@ -1,0 +1,16 @@
+.row-loginpage {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  border-radius: 10px;
+}
+.container-loginpage {
+  position: relative;
+  height: 100vh;
+}
+
+.img-custom-loginpage {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 10px;
+}
