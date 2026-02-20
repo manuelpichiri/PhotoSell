@@ -9,9 +9,9 @@ const initGooglePassport = () => {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GO_CLIENT_ID,
-      clientSecret: process.env.GO_CLIENT_SECRET,
-      callbackURL: process.env.GO_CB_URL,
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CB_URL,
     },
     (accessToken, refreshToken, profile, done) => {
       console.log("user profile", profile);

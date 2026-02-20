@@ -1,9 +1,7 @@
 const userSchema = require("./user.schema");
 
 const createUser = async (body) => {
-  const newUser = new userSchema({
-    body,
-  });
+  const newUser = new userSchema(body);
 
   const savedUser = await newUser.save();
   return savedUser;
@@ -18,11 +16,8 @@ const getUsers = async () => {
 };
 
 const getSingleUser = async (id) => {
-  const user = await userSchema.findById(id);
-  return {
-    statusCode: 200,
-    user,
-  };
+  const user = await userSchema.findById(id).populate("photo");
+  return user;
 };
 
 const updateUser = async (id, body) => {

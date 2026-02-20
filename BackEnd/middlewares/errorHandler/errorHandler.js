@@ -2,6 +2,7 @@ const HttpException = require("../../exceptions/index");
 const mongoose = require("mongoose");
 
 const errorHandler = (err, req, res, next) => {
+  console.error("Errore", err);
   if (err instanceof HttpException) {
     return res.status(err.statusCode).json({
       statusCode: err.statusCode,
@@ -22,6 +23,13 @@ const errorHandler = (err, req, res, next) => {
       message:
         "Mongoose: one of more passed or required props failed the validation",
       errors: err.errors,
+    });
+  }
+  if (err.code === 11000) {
+    return res.status(409).json({
+      statusCode: 409,
+      message: "email already exists",
+      error: err.keyValue,
     });
   }
   if (err instanceof mongoose.Error.MongooseServerSelectionError) {

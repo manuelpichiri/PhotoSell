@@ -1,0 +1,24 @@
+.div-prova {
+  height: 100vh;
+  background: #000000;
+  background: linear-gradient(
+    258deg,
+    rgba(0, 0, 0, 0.986) 0%,
+    rgba(0, 0, 0, 0.877) 0%
+  );
+}
+
+.container-row {
+  height: 100%;
+  background: #1e1a1b;
+  background: linear-gradient(
+    94deg,
+    rgba(30, 26, 27, 1) 0%,
+    rgba(48, 26, 22, 0.94) 100%
+  );
+  border-radius: 10px;
+}
+
+.img-custom-registration {
+  height: 100%;
+}

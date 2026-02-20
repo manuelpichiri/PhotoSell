@@ -1,0 +1,45 @@
+.div-phto-card {
+  position: relative;
+  border-radius: 10px;
+}
+.photo-card-custom {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.button-icon-expand {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.div-phto-card:hover .button-icon-expand {
+  opacity: 1;
+}
+.div-phto-card:hover {
+  opacity: 0.9;
+}
+
+.modal-opacity {
+  opacity: none;
+}
+
+.button-custom {
+  background-color: burlywood;
+}
+.link-custom-card {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-left: 5px;
+  text-decoration: none;
+  color: beige;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
