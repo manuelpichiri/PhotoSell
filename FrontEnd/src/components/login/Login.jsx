@@ -22,11 +22,15 @@ const Login = () => {
             <FormLogin />
           </Col>
 
-          <Col xs={12} md={6} className="p-4 d-flex flex-column ">
+          <Col
+            xs={12}
+            md={6}
+            className="p-4 d-flex flex-column align-items-center justify-content-center "
+          >
             <div className="d-flex align-items-center justify-content-center">
               <Link
                 to="/"
-                className="text-white d-flex align-items-center gap-1"
+                className="text-white d-flex align-items-center gap-1 custom-link-login"
               >
                 <Camera />
                 PhotoSell
