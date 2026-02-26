@@ -30,7 +30,7 @@ server.use(
       "https://photo-sell-hf09op2m9-manuels-projects-686a304a.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-
+    credentials: false,
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
