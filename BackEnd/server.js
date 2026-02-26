@@ -34,7 +34,6 @@ server.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
-server.options("*", cors());
 
 server.use((req, res, next) => {
   console.log("REQ:", req.method, req.path, "AUTH:", req.headers.authorization);
