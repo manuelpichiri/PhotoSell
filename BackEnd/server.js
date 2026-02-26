@@ -22,13 +22,6 @@ const {
 
 const errorHandler = require("./middlewares/errorHandler/errorHandler");
 
-server.use((req, res, next) => {
-  console.log("REQ:", req.method, req.path, "AUTH:", req.headers.authorization);
-  next();
-});
-
-server.use(express.json());
-
 server.use(
   cors({
     origin: [
@@ -41,6 +34,13 @@ server.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+
+server.use((req, res, next) => {
+  console.log("REQ:", req.method, req.path, "AUTH:", req.headers.authorization);
+  next();
+});
+
+server.use(express.json());
 
 server.use(
   session({
