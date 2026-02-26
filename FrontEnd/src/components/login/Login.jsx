@@ -3,7 +3,7 @@ import "./login.css";
 import FormLogin from "../formLogin/FormLogin";
 import { Container, Row, Col } from "react-bootstrap";
 import { Camera } from "lucide-react";
-
+import { Link } from "react-router-dom";
 import OauthLogin from "../oauthLogin/OauthLogin";
 const Login = () => {
   return (
@@ -24,16 +24,16 @@ const Login = () => {
 
           <Col xs={12} md={6} className="p-4 d-flex flex-column ">
             <div className="d-flex align-items-center justify-content-center">
-              <h3 className="text-white d-flex align-items-center gap-1">
+              <Link
+                to="/"
+                className="text-white d-flex align-items-center gap-1"
+              >
                 <Camera />
                 PhotoSell
-              </h3>
+              </Link>
             </div>
             <div className="image-wrapper">
-              <img
-                src="../../../public/74765-nature-landscape.jpg"
-                className="img-custom-div-login"
-              />
+              <img src="natureLandscape.jpg" className="img-custom-div-login" />
             </div>
           </Col>
         </Row>
