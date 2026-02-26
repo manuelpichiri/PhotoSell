@@ -31,7 +31,11 @@ server.use(express.json());
 
 server.use(
   cors({
-    origin: ["http://localhost:5173", "https://photo-sell-eight.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://photo-sell-eight.vercel.app",
+      "https://photo-sell-hf09op2m9-manuels-projects-686a304a.vercel.app",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
