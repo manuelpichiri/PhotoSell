@@ -1,4 +1,5 @@
 import "./uploadModal.css";
+import { API_URL } from "../../config/api";
 import { useContext, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { UserContext } from "../../../context/userContext";
@@ -22,16 +23,13 @@ const UploadModal = () => {
     try {
       const data = new FormData();
       data.append("photo", file);
-      const response = await fetch(
-        `http://localhost:4545/user/${decoded.id}/cloud`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: data,
+      const response = await fetch(`${API_URL}/user/${decoded.id}/cloud`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+        body: data,
+      });
       return await response.json();
     } catch (error) {
       console.log(error.message);
@@ -57,7 +55,7 @@ const UploadModal = () => {
           title: formData.title,
           price: Number(formData.price),
         };
-        const response = await fetch("http://localhost:4545/photo", {
+        const response = await fetch(`${API_URL}/photo`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import "./editModal.css";
+import { API_URL } from "../../config/api";
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
 import { UserContext } from "../../../context/userContext";
 import InputCustom from "../inputCustom/InputCustom";
@@ -27,7 +28,7 @@ const EditModal = ({ className }) => {
   const updateUser = async () => {
     console.log(user._id);
     try {
-      const response = await fetch(`http://localhost:4545/user/${user._id}`, {
+      const response = await fetch(`${API_URL}/user/${user._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

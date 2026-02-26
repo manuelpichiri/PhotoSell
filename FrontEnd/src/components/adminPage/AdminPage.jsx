@@ -1,6 +1,6 @@
 import "./adminPage.css";
 import { Container, Row, Col, Table } from "react-bootstrap";
-import InputCustom from "../inputCustom/InputCustom";
+import { API_URL } from "../../config/api";
 import { UserContext } from "../../../context/userContext";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { jwtDecode } from "jwt-decode";
@@ -34,7 +34,7 @@ const AdminPage = () => {
         toast.error("Id not valid");
         return;
       }
-      const response = await fetch(`http://localhost:4545/user/${id}`, {
+      const response = await fetch(`${API_URL}/user/${id}`, {
         headers: {
           Authorization: `Bearer ${savedToken}`,
         },
@@ -56,7 +56,7 @@ const AdminPage = () => {
   };
   const deleteUser = async (id) => {
     try {
-      const response = await fetch(`http://localhost:4545/user/${id}`, {
+      const response = await fetch(`${API_URL}/user/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -1,4 +1,5 @@
 import "./updatePhoto.css";
+import { API_URL } from "../../config/api";
 import { Container, Row, Col, Modal, Button } from "react-bootstrap";
 import { UserContext } from "../../../context/userContext";
 import { PhotoContext } from "../../../context/photoContext";
@@ -36,7 +37,7 @@ const UpdatePhoto = ({ photo }) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:4545/photo/${id}`, {
+      const response = await fetch(`${API_URL}/photo/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

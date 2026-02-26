@@ -1,6 +1,6 @@
 import { createContext, use, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-
+import { API_URL } from "../src/config/api";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
 
   const getAllUser = async () => {
     try {
-      const response = await fetch("http://localhost:4545/users", {
+      const response = await fetch(`${API_URL}/users`, {
         headers: { "Content-Type": "application/json" },
       });
       const data = await response.json();
@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
     try {
       const decoded = jwtDecode(token);
 
-      const response = await fetch(`http://localhost:4545/user/${decoded.id}`, {
+      const response = await fetch(`${API_URL}/user/${decoded.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

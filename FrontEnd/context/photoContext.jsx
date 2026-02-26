@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
+import { API_URL } from "../src/config/api";
 export const PhotoContext = createContext();
 
 export const PhotoProvider = ({ children }) => {
@@ -9,7 +9,7 @@ export const PhotoProvider = ({ children }) => {
 
   const getAllPhotoByUserId = async (id) => {
     try {
-      const response = await fetch(`http://localhost:4545/photos/${id}`, {
+      const response = await fetch(`${API_URL}/photos/${id}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -27,7 +27,7 @@ export const PhotoProvider = ({ children }) => {
         toast.error("token not found");
         return;
       }
-      const response = await fetch(`http://localhost:4545/photo/${id}`, {
+      const response = await fetch(`${API_URL}/photo/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export const PhotoProvider = ({ children }) => {
 
   const getAllPhoto = async () => {
     try {
-      const response = await fetch("http://localhost:4545/photos", {
+      const response = await fetch(`${API_URL}/photos`, {
         headers: {
           "Content-Type": "application/json",
         },

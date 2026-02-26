@@ -3,11 +3,13 @@ import "./searchingPage.css";
 import { Container, Row, Col, Form, Button, Offcanvas } from "react-bootstrap";
 import PhotoCard from "../photoCard/PhotoCard";
 import FooterCustom from "../footer/FooterCustom";
+import { API_URL } from "../../config/api";
 import NavbarCustom from "../navigation/NavbarCustom";
 const SearchingPage = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [maxPrice, setMaxPrice] = useState(9999);
+  const [maxPrice, setMaxPrice] = useState(999);
   const [photos, setPhotos] = useState([]);
+
   const [photoByTitle, setPhotoByTitle] = useState([]);
   const [showNtf, setShowNtf] = useState(false);
   const [showSideBar, setShowSidebar] = useState(false);
@@ -35,12 +37,9 @@ const SearchingPage = () => {
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:4545/photos/title/${searchValue}`,
-        {
-          headers: { "Content-Type": "application/json" },
-        },
-      );
+      const response = await fetch(`${API_URL}/photos/title/${searchValue}`, {
+        headers: { "Content-Type": "application/json" },
+      });
       if (!response.ok) {
         setShowNtf(true);
       }
@@ -54,7 +53,7 @@ const SearchingPage = () => {
 
   const getAllPhoto = async () => {
     try {
-      const response = await fetch("http://localhost:4545/photos", {
+      const response = await fetch(`${API_URL}/photos`, {
         headers: {
           "Content-Type": "application/json",
         },

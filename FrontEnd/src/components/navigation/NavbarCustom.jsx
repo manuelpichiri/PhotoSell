@@ -24,7 +24,7 @@ const NavbarCustom = () => {
         <Navbar expand="lg" className=" bg-dark text-white  p-2">
           <Container>
             <Navbar.Brand
-              href="/homepage"
+              href="/"
               className="text-custom d-flex align-items-center"
             >
               <Camera />

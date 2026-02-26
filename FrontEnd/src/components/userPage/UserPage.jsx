@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./userPage.css";
+
 import { Container, Row, Col } from "react-bootstrap";
 import { UserContext } from "../../../context/userContext";
 import { PhotoContext } from "../../../context/photoContext";

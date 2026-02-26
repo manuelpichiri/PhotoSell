@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../../config/api";
 import { Modal, Button } from "react-bootstrap";
 import toast from "react-hot-toast";
 import InputCustom from "../inputCustom/InputCustom";
@@ -35,17 +36,14 @@ const AdminEditUserModal = ({
     if (!selectedUser?._id) return toast.error("Missing user id");
 
     try {
-      const response = await fetch(
-        `http://localhost:4545/user/${selectedUser._id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(userValue),
+      const response = await fetch(`${API_URL}/user/${selectedUser._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-      );
+        body: JSON.stringify(userValue),
+      });
 
       const data = await response.json();
 

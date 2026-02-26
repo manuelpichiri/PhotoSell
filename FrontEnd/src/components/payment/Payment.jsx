@@ -1,6 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { API_URL } from "../../config/api";
 import CheckoutForm from "./checkoutForm/CheckoutForm";
 import { CartContext } from "../../../context/cartContext";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
@@ -14,17 +15,14 @@ export default function Payment() {
   useEffect(() => {
     if (total === 0) return;
     (async () => {
-      const response = await fetch(
-        "http://localhost:4545/create-payment-intent",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            amount: Math.round(total * 100),
-            currency: "eur",
-          }),
-        },
-      );
+      const response = await fetch(`${API_URL}/create-payment-intent`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: Math.round(total * 100),
+          currency: "eur",
+        }),
+      });
       const data = await response.json();
       setClientSecret(data.clientSecret);
     })();

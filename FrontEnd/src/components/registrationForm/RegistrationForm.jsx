@@ -1,5 +1,6 @@
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import InputCustom from "../inputCustom/InputCustom";
+import { API_URL } from "../../config/api";
 import { useNavigate } from "react-router-dom";
 import ButtonCustom from "../buttonCustom/ButtonCustom";
 import { useFormErrors } from "../../hook/validationHook";
@@ -20,7 +21,7 @@ const FormRegistration = () => {
 
   const registrer = async () => {
     try {
-      const response = await fetch("http://localhost:4545/user", {
+      const response = await fetch(`${API_URL}/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +29,7 @@ const FormRegistration = () => {
         body: JSON.stringify(values),
       });
       const data = await response.json();
-      navigate(`/homepage`);
+      navigate(`/`);
       return data;
     } catch (error) {
       console.log(error.message);

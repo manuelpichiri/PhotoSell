@@ -1,6 +1,7 @@
 import "./orderpage.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../config/api";
 import { UserContext } from "../../../context/userContext";
 import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../../../context/cartContext";
@@ -18,7 +19,7 @@ const OrderPage = () => {
         console.log("Token mancante: fai login");
         return null;
       }
-      const response = await fetch("http://localhost:4545/order", {
+      const response = await fetch(`${API_URL}/order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

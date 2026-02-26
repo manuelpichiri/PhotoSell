@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import "./resetPassword.css";
+import { API_URL } from "../../config/api";
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
@@ -18,7 +19,7 @@ const ResetPassword = () => {
 
   const recoverPassword = async () => {
     try {
-      const response = await fetch(`http://localhost:4545/reset-password`, {
+      const response = await fetch(`${API_URL}/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ savedToken, password }),

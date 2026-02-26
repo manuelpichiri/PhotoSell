@@ -2,6 +2,7 @@ import { Container, Row, Col, Alert } from "react-bootstrap";
 import "./formLogin.css";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
+import { API_URL } from "../../config/api";
 import ButtonCustom from "../buttonCustom/ButtonCustom";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/userContext";
@@ -18,7 +19,7 @@ const FormLogin = () => {
   const login = async () => {
     try {
       setLoginError("");
-      const response = await fetch("http://localhost:4545/auth/login", {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

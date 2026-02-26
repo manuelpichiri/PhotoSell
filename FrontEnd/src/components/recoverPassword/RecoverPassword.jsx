@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./recoverPassword.css";
+import { API_URL } from "../../config/api";
 import { Container, Row, Col } from "react-bootstrap";
 import toast from "react-hot-toast";
 import InputCustom from "../inputCustom/InputCustom";
@@ -13,7 +14,7 @@ const RecoverPassword = () => {
         toast.error("Email not valid");
         return;
       }
-      const response = await fetch("http://localhost:4545/recover-password", {
+      const response = await fetch(`${API_URL}/recover-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
