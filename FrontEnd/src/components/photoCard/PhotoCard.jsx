@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../../../context/cartContext";
 import { PhotoContext } from "../../../context/photoContext";
 import { UserContext } from "../../../context/userContext";
-import UpdatePhoto from "../updatePhoto/updatePhoto";
+import UpdatePhoto from "../updatePhoto/UpdatePhoto";
 const PhotoCard = ({
   showDelete,
   id,
