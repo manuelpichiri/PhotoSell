@@ -9,10 +9,13 @@ const InputCustom = ({
   className,
   classNameInput,
   name,
+  classNameDiv,
 }) => {
   return (
     <>
-      <div className="d-flex justify-content-between mb-3 align-items-center ">
+      <div
+        className={`d-flex justify-content-between mb-3 ${classNameDiv} align-items-center`}
+      >
         <label className={`label-custom m-0 p-0  ${className}`}>{text}</label>
         <input
           name={name}

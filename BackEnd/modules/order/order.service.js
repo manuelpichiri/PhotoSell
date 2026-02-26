@@ -31,19 +31,28 @@ const updateOrder = async (id, body) => {
 };
 
 const createOrder = async (body) => {
+  const photoIds = body.items.map((i) => i.photoId);
+
   const photos = await photoSchema.find({
-    _id: { $in: body.items },
+    _id: { $in: photoIds },
   });
-  if (photos.length !== body.items.length) {
+
+  if (photos.length !== photoIds.length) {
     throw new Error("One or more photo not found");
   }
-  const user = await userSchema.findById(body.user);
 
+  const user = await userSchema.findById(body.user);
   if (!user) {
     throw new Error("User not found");
   }
 
-  const total = photos.reduce((sum, p) => sum + p.price, 0);
+  const photoMap = new Map(photos.map((p) => [String(p._id), p]));
+
+  const total = body.items.reduce((sum, item) => {
+    const photo = photoMap.get(String(item.photoId));
+    if (!photo) throw new Error("Photo not found");
+    return sum + photo.price * item.qty;
+  }, 0);
 
   const order = new orderSchema({
     user: body.user,
@@ -52,7 +61,16 @@ const createOrder = async (body) => {
     status: "pending",
     delivery: body.delivery || "digital",
   });
+
   return order.save();
+};
+
+const findOrderByUserId = async (id) => {
+  const order = await orderSchema
+    .find({ user: id })
+    .populate("items", "image title")
+    .populate("user", "firstName lastName email");
+  return order;
 };
 
 module.exports = {
@@ -61,4 +79,5 @@ module.exports = {
   deleteOrder,
   getSingleOrder,
   getOrders,
+  findOrderByUserId,
 };

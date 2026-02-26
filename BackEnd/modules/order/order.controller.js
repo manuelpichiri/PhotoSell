@@ -1,3 +1,4 @@
+const orderSchema = require("./order.schema");
 const orderService = require("./order.service");
 
 const findAllOrders = async (req, res) => {
@@ -46,6 +47,13 @@ const findOrderById = async (req, res) => {
 
 const createOrder = async (req, res) => {
   try {
+    console.log("AUTH HEADER:", req.headers.authorization);
+    if (!req.user?.id) {
+      return res.status(401).send({
+        statusCode: 401,
+        message: "Unauthorized: missing or invalid token",
+      });
+    }
     const userId = req.user.id;
     const { items, delivery } = req.body;
     const order = await orderService.createOrder({
@@ -102,10 +110,28 @@ const deleteOrderById = async (req, res) => {
   }
 };
 
+const findOrderByIduser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const order = await orderService.findOrderByUserId(id);
+    res.status(200).send({
+      statusCode: 200,
+      order,
+    });
+  } catch (error) {
+    res.status(500).send({
+      error,
+      statusCode: 500,
+      message: "an error during the request findOrderByIduser",
+    });
+  }
+};
+
 module.exports = {
   deleteOrderById,
   updateOrderById,
   createOrder,
   findOrderById,
   findAllOrders,
+  findOrderByIduser,
 };

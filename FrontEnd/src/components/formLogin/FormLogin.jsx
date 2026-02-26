@@ -1,11 +1,14 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import "./formLogin.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ButtonCustom from "../buttonCustom/ButtonCustom";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../context/userContext";
 const FormLogin = () => {
-  const [logged, setLogged] = useState(false);
+  const { logged, setLogged } = useContext(UserContext);
+
+  const [loginError, setLoginError] = useState("");
   const [userValue, setUserValue] = useState({
     email: "",
     password: "",
@@ -14,6 +17,7 @@ const FormLogin = () => {
   const navigate = useNavigate();
   const login = async () => {
     try {
+      setLoginError("");
       const response = await fetch("http://localhost:4545/auth/login", {
         method: "POST",
         headers: {
@@ -22,11 +26,15 @@ const FormLogin = () => {
         body: JSON.stringify(userValue),
       });
       const data = await response.json();
+      if (!response.ok) {
+        setLoginError("Email o password non corretti");
+        return;
+      }
       if (data.token) {
         localStorage.setItem("token", data.token);
         setLogged(true);
-        console.log(data);
-        navigate(`/userPage`);
+
+        navigate(`/`);
       } else {
         return;
       }
@@ -42,11 +50,11 @@ const FormLogin = () => {
 
   return (
     <>
-      <Container fluid>
-        <Row className="d-flex align-items-center justify-content-center ">
+      <Container className="mb-3 ">
+        <Row className="d-flex align-items-center justify-content-center  ">
           <Col xs={12}>
             <div className="d-flex  justify-content-center ">
-              <form onSubmit={submitOn} className="d-flex flex-column gap-4 ">
+              <form onSubmit={submitOn} className="d-flex flex-column gap-4  ">
                 <input
                   className="input-custom-formlogin"
                   type="email"
@@ -65,6 +73,13 @@ const FormLogin = () => {
                     setUserValue({ ...userValue, password: e.target.value });
                   }}
                 ></input>
+                {loginError && (
+                  <div className="d-flex align-items-center justify-content-end">
+                    <Alert className="w-100  " variant="danger">
+                      <p>{loginError}</p>
+                    </Alert>
+                  </div>
+                )}
                 <div>
                   <Link to="/recover-password">Forgot password?</Link>
                 </div>

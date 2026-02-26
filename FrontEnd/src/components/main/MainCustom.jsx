@@ -1,7 +1,5 @@
 import "./mainCustom.css";
 import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import ButtonCustom from "../buttonCustom/ButtonCustom";
 import { useNavigate } from "react-router-dom";
 
@@ -16,9 +14,7 @@ const MainCustom = () => {
             {" "}
             <div className="m-4">
               <div>
-                <h1 className="h1-custom-main">
-                  EXPERIENCE OF 10 YEARS IN THE FIELD
-                </h1>
+                <h1 className="h1-custom-main">EXPERIENCE FOR THE SELLER</h1>
               </div>
               <div className="w-100  ">
                 <img
@@ -36,25 +32,16 @@ const MainCustom = () => {
           >
             <div className="mt-5 ">
               <ul className="d-flex  flex-column gap-4">
-                <li className="li-custom-main">
-                  <Link className="link-custom-main">
-                    FOOD PHOTOGRAPHY <ArrowRight color="black" />
-                  </Link>
-                </li>
-                <li className="li-custom-main">
-                  <Link className="link-custom-main">
-                    PORTRAIT PHOTOGRAPHY <ArrowRight color="black" />
-                  </Link>
-                </li>
-                <li className="li-custom-main">
-                  <Link className="link-custom-main">
-                    ARCHITECTURE PHOTOGRAPHY <ArrowRight color="black" />
-                  </Link>
-                </li>
+                <li className="li-custom-main">FOOD PHOTOGRAPHY</li>
+                <li className="li-custom-main">PORTRAIT PHOTOGRAPHY</li>
+                <li className="li-custom-main">ARCHITECTURE PHOTOGRAPHY</li>
                 <div className="mt-4 ">
-                  <ButtonCustom type="button" onClick={() => navigate("*")}>
-                    About us
-                  </ButtonCustom>
+                  <ButtonCustom
+                    type="button"
+                    onClick={() => navigate("/search")}
+                    className="text-white"
+                    text="Search"
+                  ></ButtonCustom>
                 </div>
               </ul>
             </div>

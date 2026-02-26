@@ -31,27 +31,39 @@ const HeroCustom = () => {
               className="mySwiper"
             >
               <SwiperSlide>
-                <img src="https://images.pexels.com/photos/792381/pexels-photo-792381.jpeg?cs=srgb&dl=pexels-george-desipris-792381.jpg&fm=jpg" />
+                <img src="DSC07553.JPG" />
               </SwiperSlide>
 
-              <SwiperSlide>Slide 2</SwiperSlide>
-              <SwiperSlide>Slide 3</SwiperSlide>
-              <SwiperSlide>Slide 4</SwiperSlide>
-              <SwiperSlide>Slide 5</SwiperSlide>
-              <SwiperSlide>Slide 6</SwiperSlide>
-              <SwiperSlide>Slide 7</SwiperSlide>
-              <SwiperSlide>Slide 8</SwiperSlide>
-              <SwiperSlide>Slide 9</SwiperSlide>
+              <SwiperSlide>
+                <img src="DSC07566.JPG" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="DSC07569.JPG" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="DSC07575.JPG" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="DSC07613.jpg" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="DSC07618.jpg" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="DSC07670.jpg" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="DSC07697.jpg" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="DSC07565.JPG" />
+              </SwiperSlide>
             </Swiper>
           </Col>
         </Row>
         <Row>
           <Col xs={12} className="mt-3">
-            <div className="d-flex align-items-center justify-content-around div-link-custom-hero p-3">
-              <Link className="link-hero-custom">ASDAD</Link>
-              <Link className="link-hero-custom">asd</Link>
-              <Link className="link-hero-custom">ad</Link>
-            </div>
+            <div className="d-flex div-link-custom-hero p-3"></div>
           </Col>
         </Row>
       </Container>

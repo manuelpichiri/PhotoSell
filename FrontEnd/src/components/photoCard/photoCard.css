@@ -4,18 +4,28 @@
 }
 .photo-card-custom {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 10px 10px 0px 0px;
+}
+.photo-card-custom-modal {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .button-icon-expand {
   background-color: transparent;
   border: none;
   position: absolute;
-  top: 50%;
-  left: 50%;
+
   opacity: 0;
   transition: opacity 0.2s ease;
+}
+.div-image-container {
+  width: 100%;
+  height: 300px;
 }
 
 .div-phto-card:hover .button-icon-expand {
@@ -29,9 +39,6 @@
   opacity: none;
 }
 
-.button-custom {
-  background-color: burlywood;
-}
 .link-custom-card {
   display: flex;
   align-items: center;
@@ -42,4 +49,26 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.button-add-custom {
+  background-color: burlywood;
+  border: none;
+  border-radius: 12px 0px 0px 12px;
+  font-weight: 600;
+}
+
+.button-add-custom:hover {
+  transform: scale(0.7);
+}
+
+.span-custom-modal {
+  font-weight: 600;
+  font-size: large;
+}
+
+.modal-title-custom {
+  font-weight: 600;
+  font-size: 32px;
+  color: brown;
 }

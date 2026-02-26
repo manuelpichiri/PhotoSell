@@ -1,0 +1,41 @@
+.checkout-form {
+  max-width: 520px;
+  margin: 30px auto;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.checkout-btn {
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #111;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.checkout-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.checkout-message {
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f7f7f7;
+  color: #111;
+  font-size: 14px;
+}
+
+.checkout-page {
+  min-height: 100vh;
+  padding: 24px;
+  background: #f2f2f2;
+}

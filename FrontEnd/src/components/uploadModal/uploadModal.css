@@ -4,3 +4,19 @@
   background-color: rgb(221, 221, 221);
   border-radius: 5px;
 }
+
+.h3-modal-custom {
+  border-bottom: 1px solid;
+  border-color: grey;
+  color: #f5f5f5;
+}
+
+.btn-custom-upload-modal {
+  background-color: #ff7a2f;
+  color: white;
+}
+
+.btn-custom-upload-modal:hover {
+  background-color: #ff944d;
+  color: black;
+}

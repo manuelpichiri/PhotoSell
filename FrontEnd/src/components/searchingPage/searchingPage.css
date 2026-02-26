@@ -2,6 +2,7 @@
   border: none;
   border-radius: 10px;
   background-color: coral;
+  padding: 5px;
 }
 
 .search-bar {
@@ -10,4 +11,27 @@
   border-right: 0;
   border-radius: 10px;
   outline: none;
+}
+
+.div-background-searching-page {
+  background-color: #2f3e34;
+}
+
+.custom-height {
+  min-height: 100vh;
+  display: flex;
+}
+
+.btn-filter {
+  border: none;
+  border-radius: 10px;
+  background-color: coral;
+  color: black;
+  padding: 5px;
+}
+
+.btn-filter:hover,
+.search-button-custom:hover {
+  background-color: orange;
+  color: white;
 }

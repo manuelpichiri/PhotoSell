@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, use, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 export const UserContext = createContext();
@@ -7,6 +7,7 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [savedToken, setSavedToken] = useState("");
   const [users, setUsers] = useState([]);
+  const [logged, setLogged] = useState(false);
 
   const getAllUser = async () => {
     try {
@@ -41,13 +42,19 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (token) {
-      setSavedToken(token);
-      getSingleUser(token);
-      getAllUser();
-      console.log(user);
+    if (!token) {
+      setLogged(false);
+      setSavedToken("");
+      setUser({});
+
+      return;
     }
-  }, []);
+
+    setLogged(true);
+    setSavedToken(token);
+    getSingleUser(token);
+    getAllUser();
+  }, [savedToken]);
 
   return (
     <UserContext.Provider
@@ -57,6 +64,8 @@ export const UserProvider = ({ children }) => {
         savedToken,
         users,
         setUsers,
+        logged,
+        setLogged,
       }}
     >
       {children}
