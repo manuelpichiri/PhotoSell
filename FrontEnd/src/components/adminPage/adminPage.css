@@ -1,0 +1,11 @@
+.search-button-custom-admin {
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  background-color: coral;
+}
+
+.search-button-custom-admin:hover {
+  background-color: orange;
+  color: white;
+}

@@ -1,14 +1,33 @@
 import { useContext, useEffect, useState } from "react";
 import "./searchingPage.css";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Offcanvas } from "react-bootstrap";
 import PhotoCard from "../photoCard/PhotoCard";
 import FooterCustom from "../footer/FooterCustom";
+import NavbarCustom from "../navigation/NavbarCustom";
 const SearchingPage = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [maxPrice, setMaxPrice] = useState(9999);
   const [photos, setPhotos] = useState([]);
   const [photoByTitle, setPhotoByTitle] = useState([]);
+  const [showNtf, setShowNtf] = useState(false);
+  const [showSideBar, setShowSidebar] = useState(false);
+
+  const show = () => {
+    setShowSidebar(true);
+  };
+  const showOff = () => {
+    setShowSidebar(false);
+  };
+  const list = photoByTitle.length > 0 ? photoByTitle : photos;
+
+  const filtered = list.filter((photo) => {
+    const price = Number(photo.price);
+    if (!Number.isFinite(price)) return true; //isFinite controlla che sia un numero e che non sia Infinito negativo e positivo
+    return price <= maxPrice;
+  });
 
   const getPhotoByTitle = async (searchValue) => {
+    setShowNtf(false);
     if (!searchValue?.trim()) {
       // ?=> evita il crash in caso il value sie undefined
       setPhotoByTitle([]);
@@ -22,7 +41,9 @@ const SearchingPage = () => {
           headers: { "Content-Type": "application/json" },
         },
       );
-
+      if (!response.ok) {
+        setShowNtf(true);
+      }
       const data = await response.json();
       console.log(data);
       setPhotoByTitle(data.photos ?? []);
@@ -58,32 +79,47 @@ const SearchingPage = () => {
   }, []);
 
   return (
-    <>
-      <Container fluid className="bg-warning">
-        <Row>
-          <Col xs={4}>
+    <div className="div-background-searching-page ">
+      <NavbarCustom />
+      <Container fluid>
+        <Row className="d-flex justify-content-between align-items-center">
+          <Col xs={3}>
             <div>
-              <form>
-                <label for="range1" className="form-label">
-                  Price
-                </label>
-                <input
-                  type="range"
-                  className="form-range"
-                  id="range1"
-                  min="0"
-                  max="9999"
-                ></input>
-                <output
-                  for="range4"
-                  id="rangeValue"
-                  aria-hidden="true"
-                ></output>
-              </form>
+              <button className="btn-filter" onClick={show}>
+                Filter
+              </button>
+
+              <Offcanvas show={showSideBar} onHide={showOff}>
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title>Filter</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <form onSubmit={submitOn} className=" ">
+                    <div>
+                      {" "}
+                      <label for="range1" className="form-label">
+                        Price
+                      </label>
+                      <input
+                        type="range"
+                        className="form-range"
+                        id="range1"
+                        min="0"
+                        max="999"
+                        value={maxPrice}
+                        onChange={(e) => setMaxPrice(Number(e.target.value))}
+                      ></input>
+                      <output for="range4" id="rangeValue" aria-hidden="true">
+                        {maxPrice}
+                      </output>
+                    </div>
+                  </form>
+                </Offcanvas.Body>
+              </Offcanvas>
             </div>
           </Col>
-          <Col xs={8}>
-            <div className="mt-5">
+          <Col xs={9}>
+            <div className="mt-3 mb-3">
               <form
                 className="w-100 d-flex justify-content-center gap-2"
                 onSubmit={submitOn}
@@ -103,23 +139,40 @@ const SearchingPage = () => {
               </form>
             </div>
           </Col>
+        </Row>
 
-          <Col xs={12} className="d-flex ">
-            {photoByTitle.map((photo) => (
-              <PhotoCard
+        <Row className="mt-4 custom-height  ">
+          {showNtf ? (
+            <Col
+              xs={12}
+              className="d-flex align-items-center justify-content-center  flex-grow-1 "
+            >
+              <div className="d-flex align-items-center justify-content-center w-100 ">
+                <h1 className="text-white">Nothing was found...</h1>
+              </div>
+            </Col>
+          ) : (
+            filtered.map((photo) => (
+              <Col
+                xs={12}
+                md={4}
+                className="d-flex justify-content-between "
                 key={photo._id}
-                title={photo.title}
-                userName={photo.user.firstName}
-                lastName={photo.user.lastName}
-                src={photo.image}
-                photo={photo}
-              ></PhotoCard>
-            ))}
-          </Col>
+              >
+                <PhotoCard
+                  title={photo.title}
+                  userName={photo.user.firstName}
+                  lastName={photo.user.lastName}
+                  src={photo.image}
+                  photo={photo}
+                />
+              </Col>
+            ))
+          )}
         </Row>
       </Container>
       <FooterCustom />
-    </>
+    </div>
   );
 };
 export default SearchingPage;

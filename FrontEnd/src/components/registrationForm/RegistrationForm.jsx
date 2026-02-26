@@ -37,7 +37,7 @@ const FormRegistration = () => {
   };
   const submitOn = async (e) => {
     e.preventDefault();
-    const err = validateInput();
+    const err = validateInput({ noFuture: true });
     if (Object.keys(err).length > 0) return;
     await registrer();
   };
@@ -68,12 +68,7 @@ const FormRegistration = () => {
               />
               {errors.firstName && (
                 <div className="d-flex align-items-center justify-content-end">
-                  <Alert
-                    className="w-50"
-                    variant="danger"
-                    onClose={() => setShow(false)}
-                    dismissible
-                  >
+                  <Alert className="w-50" variant="danger">
                     <p>{errors.firstName}</p>
                   </Alert>
                 </div>
@@ -88,12 +83,7 @@ const FormRegistration = () => {
               />
               {errors.lastName && (
                 <div className="d-flex align-items-center justify-content-end">
-                  <Alert
-                    className="w-50"
-                    variant="danger"
-                    onClose={() => setShow(false)}
-                    dismissible
-                  >
+                  <Alert className="w-50" variant="danger">
                     <p>{errors.lastName}</p>
                   </Alert>
                 </div>
@@ -108,12 +98,7 @@ const FormRegistration = () => {
               />
               {errors.email && (
                 <div className="d-flex align-items-center justify-content-end">
-                  <Alert
-                    className="w-50"
-                    variant="danger"
-                    onClose={() => setShow(false)}
-                    dismissible
-                  >
+                  <Alert className="w-50" variant="danger">
                     <p>{errors.email}</p>
                   </Alert>
                 </div>
@@ -128,12 +113,7 @@ const FormRegistration = () => {
               />
               {errors.password && (
                 <div className="d-flex align-items-center justify-content-end">
-                  <Alert
-                    className="w-50"
-                    variant="danger"
-                    onClose={() => setShow(false)}
-                    dismissible
-                  >
+                  <Alert className="w-50" variant="danger">
                     <p>{errors.password}</p>
                   </Alert>
                 </div>
@@ -146,14 +126,9 @@ const FormRegistration = () => {
                 value={values.dateOfBirth}
                 onChange={inputControl}
               />
-              {errors.date && (
+              {errors.dateOfBirth && (
                 <div className="d-flex align-items-center justify-content-end">
-                  <Alert
-                    className="w-50"
-                    variant="danger"
-                    onClose={() => setShow(false)}
-                    dismissible
-                  >
+                  <Alert className="w-50" variant="danger">
                     <p>{errors.dateOfBirth}</p>
                   </Alert>
                 </div>
@@ -168,12 +143,7 @@ const FormRegistration = () => {
               />
               {errors.country && (
                 <div className="d-flex align-items-center justify-content-end">
-                  <Alert
-                    className="w-50"
-                    variant="danger"
-                    onClose={() => setShow(false)}
-                    dismissible
-                  >
+                  <Alert className="w-50" variant="danger">
                     <p>{errors.country}</p>
                   </Alert>
                 </div>

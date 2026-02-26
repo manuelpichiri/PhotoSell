@@ -18,7 +18,7 @@ const NotFoundPage = () => {
                 className="button-custom-notFound"
                 text="Home"
                 type="button"
-                onClick={() => navigate("/homepage")}
+                onClick={() => navigate("/")}
               />
             </div>
           </Col>

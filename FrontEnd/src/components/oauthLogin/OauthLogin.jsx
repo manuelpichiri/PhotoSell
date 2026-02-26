@@ -7,7 +7,7 @@ const OauthLogin = () => {
 
   return (
     <>
-      <div className="d-flex align-items-center justify-content-center">
+      <div className="d-flex align-items-center justify-content-center mt-3">
         <button onClick={loginWithGoogle} className="btn-oauth-login">
           <img
             src="../../../public/google-icon.png"

@@ -12,7 +12,8 @@ const verifyToken = (req, res, next) => {
   if (excludedRoutes.includes(req.path)) {
     return next();
   }
-  const token = req.header("authorization");
+
+  const token = req.headers.authorization;
 
   if (!token || !token.startsWith("Bearer ")) {
     throw new invalidOrMissingToken();
@@ -23,6 +24,7 @@ const verifyToken = (req, res, next) => {
     req.user = decodedToken;
     next();
   } catch (error) {
+    console.log("JWT VERIFY ERROR:", error.message);
     next(error);
   }
 };

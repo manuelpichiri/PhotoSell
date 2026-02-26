@@ -3,3 +3,12 @@
   height: 150px;
   border-radius: 12px;
 }
+
+.button-custom-modal-cart {
+  background-color: transparent;
+  border: none;
+}
+
+.button-custom-modal-cart:hover {
+  color: #c16532;
+}

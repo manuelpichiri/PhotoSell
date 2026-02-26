@@ -36,7 +36,7 @@ const EditModal = ({ className }) => {
         body: JSON.stringify(userValue),
       });
       const data = await response.json();
-      console.log(data.user.user);
+
       setUser(data.user.user);
       return data;
     } catch (error) {
@@ -61,7 +61,7 @@ const EditModal = ({ className }) => {
     <Container className={className}>
       <Row>
         <Col xs={12}>
-          <Button className="  modalEdit-button-custom" onClick={modalOn}>
+          <Button className="  modal-edit-button-custom" onClick={modalOn}>
             Edit Profile
           </Button>
 

@@ -11,10 +11,6 @@
   border-bottom: solid 1px;
   border-color: black;
   list-style-type: none;
-}
-
-.link-custom-main {
-  color: black;
   font-size: 30px;
   font-weight: 500;
   text-decoration: none;

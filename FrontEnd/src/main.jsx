@@ -7,15 +7,18 @@ import { UserProvider } from "../context/userContext.jsx";
 import { PhotoProvider } from "../context/photoContext.jsx";
 import App from "./App.jsx";
 import { CartProvider } from "../context/cartContext.jsx";
+import { OrderProvider } from "../context/orderContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <CartProvider>
-      <UserProvider>
-        <PhotoProvider>
-          <App />
-        </PhotoProvider>
-      </UserProvider>
-    </CartProvider>
+    <OrderProvider>
+      <CartProvider>
+        <UserProvider>
+          <PhotoProvider>
+            <App />
+          </PhotoProvider>
+        </UserProvider>
+      </CartProvider>
+    </OrderProvider>
   </StrictMode>,
 );

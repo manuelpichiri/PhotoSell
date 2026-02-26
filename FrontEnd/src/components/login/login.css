@@ -1,16 +1,30 @@
-.row-loginpage {
-  position: absolute;
-  top: 15%;
-  left: 10%;
-  border-radius: 10px;
-}
-.container-loginpage {
-  position: relative;
+.container-login {
   height: 100vh;
+  background-image: url("../../../public/bright-colored-abstract-background-with-brown-wave-design-for-banner-cover-book-brochure-and-other-graphic-design-elements-eps10-vector.jpg");
 }
 
-.img-custom-loginpage {
-  object-fit: cover;
+.row-loginpage {
+  overflow: hidden;
+  min-height: 70vh;
+  border-radius: 12px;
+  background: #1e1a1b;
+  background: linear-gradient(
+    94deg,
+    rgba(30, 26, 27, 1) 0%,
+    rgba(48, 26, 22, 0.94) 100%
+  );
+}
+.image-wrapper {
   width: 100%;
-  border-radius: 10px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.img-custom-div-login {
+  object-fit: cover;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
 }

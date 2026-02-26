@@ -13,7 +13,7 @@ export const CartProvider = ({ children }) => {
         return cart.map((item) => {
           //se esiste faccio un map
           if (item._id === photo._id) {
-            //metto a confronto l'id della photo che arriva come parametro e quello presente nel cart
+            //metto a confronto l'id della photo che arriva come parametro a quello presente nel cart
             return { ...item, qty: item.qty + 1 }; // se è lo stesso aumento la quantità altrimento lo lascio com'è
           }
           return item;
@@ -37,12 +37,18 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  const total = cart.reduce(
+    (acc, item) => acc + (Number(item.price) || 0) * (Number(item.qty) || 0),
+    0,
+  );
+
   return (
     <CartContext.Provider
       value={{
         addElement,
         removeElement,
         cart,
+        total,
       }}
     >
       {children}

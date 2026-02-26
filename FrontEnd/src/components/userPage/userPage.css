@@ -32,24 +32,49 @@
   top: 67%;
   right: -35%;
 }
+.div-user-page-custom {
+  border-bottom: 1px solid;
+  border-color: grey;
+}
 
 p {
   margin: 0;
 }
 
-.h3-userpage-custom {
-  border-bottom: 1px solid;
-  border-color: grey;
-}
-
 .div-button-edit {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .contanier-userpage-custom {
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
+}
+
+.container-user-page {
+  background: #1f2d2b;
+}
+
+.row-custom-user-page {
+  border-radius: 12px;
+  background-color: #2c3e3b;
+}
+
+.text-h-custom {
+  color: #f5f5f5;
+}
+
+.div-info:nth-child(n) {
+  color: #b7c4c2;
+}
+
+@media (max-width: 425px) {
+  .img-userpage {
+    display: none;
+  }
+  .div-avatar-img-userpage {
+    border: none;
+  }
 }

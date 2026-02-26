@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./recoverPassword.css";
 import { Container, Row, Col } from "react-bootstrap";
+import toast from "react-hot-toast";
 import InputCustom from "../inputCustom/InputCustom";
 const RecoverPassword = () => {
   const [email, setEmail] = useState("");
@@ -8,6 +9,10 @@ const RecoverPassword = () => {
 
   const sendEmail = async () => {
     try {
+      if (!email) {
+        toast.error("Email not valid");
+        return;
+      }
       const response = await fetch("http://localhost:4545/recover-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -15,8 +20,9 @@ const RecoverPassword = () => {
       });
       const data = await response.json();
       setMsg("Email send");
+      toast.success("Email send");
     } catch (error) {
-      console.log(error.msg);
+      toast.error("Error");
     }
   };
 
@@ -30,13 +36,27 @@ const RecoverPassword = () => {
 
   return (
     <>
-      <Container className="d-flex align-items-center justify-content-center container-recover-password">
-        <Row>
+      <Container
+        fluid
+        className="d-flex align-items-center justify-content-center container-recover-password"
+      >
+        <Row className="row-recover-password">
+          <Col xs={12} className="d-flex flex-column">
+            <div className="d-flex align-items-center justify-content-center m-3 ">
+              <img
+                src="../../../public/dogAnswering.jpg"
+                className="img-recover-password"
+              />
+            </div>
+            <div className="d-flex align-items-center justify-content-center w-100">
+              <h1 className="text-center">Recover Password</h1>
+            </div>
+          </Col>
           <Col
             xs={12}
-            className="d-flex align-items-center justify-content-center"
+            className="d-flex align-items-center justify-content-center p-3"
           >
-            <div className="d-flex flex-row div-form-recover-password">
+            <div className="d-flex flex-row div-form-recover-password ">
               <form onSubmit={onSubmit}>
                 <InputCustom
                   className="text-dark me-3"
@@ -55,7 +75,6 @@ const RecoverPassword = () => {
                 </div>
               </form>
             </div>
-            {msg && <p>{msg} "da inserire toast"</p>}
           </Col>
         </Row>
       </Container>

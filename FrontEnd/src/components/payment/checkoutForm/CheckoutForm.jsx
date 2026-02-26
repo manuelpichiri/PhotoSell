@@ -1,5 +1,7 @@
 import { useState } from "react";
-
+import NavbarCustom from "../../navigation/NavbarCustom";
+import FooterCustom from "../../footer/FooterCustom";
+import "./checkout.css";
 import {
   PaymentElement,
   useElements,
@@ -24,17 +26,13 @@ const CheckoutForm = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // In demo puoi mettere una rotta "success" o la home
         return_url: `${window.location.origin}/paymentSucess`,
       },
-      // redirect: "if_required" // opzionale: utile in alcune UX,
     });
 
-    // Se non c'è redirect, gestisci errore immediato (dati incompleti, ecc.)
     if (error) {
       setMessage(error.message || "Pagamento non riuscito.");
     } else {
-      // Normalmente l’utente viene rediretto alla return_url.
       setMessage(
         "Conferma inviata. Se non c’è redirect, controlla lo stato del PaymentIntent.",
       );
@@ -44,17 +42,26 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <PaymentElement />
-      <button
-        disabled={isLoading || !stripe || !elements}
-        style={{ marginTop: 16, width: "100%", padding: 12 }}
-      >
-        {isLoading ? "Elaborazione..." : "Paga"}
-      </button>
+    <>
+      <NavbarCustom />
+      <form className="checkout-form" onSubmit={handleSubmit}>
+        <PaymentElement />
+        <button
+          className="checkout-btn"
+          disabled={isLoading || !stripe || !elements}
+          style={{ marginTop: 16, width: "100%", padding: 12 }}
+        >
+          {isLoading ? "Elaborazione..." : "Paga"}
+        </button>
 
-      {message && <div style={{ marginTop: 12 }}>{message}</div>}
-    </form>
+        {message && (
+          <div className="checkout-message" style={{ marginTop: 12 }}>
+            {message}
+          </div>
+        )}
+      </form>
+      <FooterCustom />
+    </>
   );
 };
 

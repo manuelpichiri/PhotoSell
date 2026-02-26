@@ -67,6 +67,39 @@ const findPhotoByTitle = async (title) => {
   return photos; //<--- in questo modo non mi ritorna un'oggetto annidato e non sono costretto a fare photo.photo
 };
 
+/*const findPhotoByFilters = async (queryParams) => {
+
+  const filter = {};
+
+  if (queryParams.city) {
+    filter.city = {
+      $regex: queryParams.city,
+      $options: "i",
+    };
+  }
+
+  if (queryParams.title) {
+    filter.title = {
+      $regex: queryParams.title,
+      $options: "i",
+    };
+  }
+
+  if (queryParams.from || queryParams.to) {
+    filter.createdAt = {};
+
+    if (queryParams.from)
+      filter.createdAt.$gte = new Date(queryParams.from);
+
+    if (queryParams.to)
+      filter.createdAt.$lte = new Date(queryParams.to);
+  }
+
+  const photos = await photoSchema.find(filter);
+
+  return photos;
+};*/
+
 const findPhotoByUserId = async (id) => {
   const photos = await photoSchema
     .find({ user: id })

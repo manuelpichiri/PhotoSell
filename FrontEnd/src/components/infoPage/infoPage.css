@@ -1,0 +1,22 @@
+.info-container {
+  background-color: #2f3e34;
+  color: white;
+  min-height: 100vh;
+}
+
+.info-subtitle {
+  color: #cfcfcf;
+  max-width: 600px;
+  margin: auto;
+}
+
+.h1-custom-info,
+.h3-custom-info,
+.h4-custom-info {
+  margin-bottom: 15px;
+}
+
+.ul-custom-info,
+.ol-custom-info {
+  padding-left: 20px;
+}

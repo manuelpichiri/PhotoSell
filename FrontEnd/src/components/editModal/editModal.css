@@ -1,8 +1,16 @@
-.modalEdit-button-custom {
+.modal-edit-button-custom {
   text-align: center;
   font-size: medium;
+  background-color: #ff7a2f;
+  color: white;
+  border: none;
 }
 
 .label-color-modalEdit {
+  color: black;
+}
+
+.modal-edit-button-custom:hover {
+  background-color: #ff944d;
   color: black;
 }

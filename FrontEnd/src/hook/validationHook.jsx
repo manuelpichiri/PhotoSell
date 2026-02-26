@@ -22,6 +22,10 @@ export const useFormErrors = (inputValue) => {
     if (!values.lastName || values.lastName.trim().length < 2) {
       errorsInput.lastName = "Cognome troppo corto";
     }
+    if (!values.password || values.password.length < 8) {
+      errorsInput.password =
+        "La password richiede almeno 8 caratteri tra cui una lettera maiuscola e minuscola e un carattere speciale";
+    }
 
     if (!values.email) {
       errorsInput.email = "Email obbligatoria";
@@ -29,26 +33,23 @@ export const useFormErrors = (inputValue) => {
       errorsInput.email = "Email non valida";
     }
 
-    if (!values.password) {
-      errorsInput.password = "Password obbligatoria";
-    } else if (values.password.length < 8) {
-      errorsInput.password = "Password minimo 8 caratteri";
-    }
-    /*const dateStr = values.dateOfBirth;
-    const year = dateStr.getYear();
-    const now = Date.now();
-    const yearNow = now.getYear();
+    const dateStr = values.dateOfBirth;
+
     if (!dateStr) {
       errorsInput.dateOfBirth = "La data è richiesta";
-    } else if (year - yearNow) {
     } else {
-      const date = new Date(dateStr);
+      const [year, month, day] = dateStr.split("-").map(Number); //evita i bug del fusorario
+      const date = new Date(year, month - 1, day);
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
       if (Number.isNaN(date.getTime())) {
         errorsInput.dateOfBirth = "Data non valida";
-      } else if (options.noFuture && date > new Date()) {
+      } else if (options.noFuture && date > today) {
         errorsInput.dateOfBirth = "Arrivi dal futuro?";
       }
-    }*/
+    }
     if (!values.country) {
       errorsInput.country = "Country obbligatoria";
     }

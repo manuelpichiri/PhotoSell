@@ -11,20 +11,31 @@ const ProductSection = () => {
 
   return (
     <>
-      <Container className="bg-info mt-3">
-        <Row>
+      <Container className="container-custom-prod-section mt-3 ">
+        <Row className="pb-3">
           <Col xs={12}>
-            <div className="d-flex align-items-center justify-content-center">
-              <h2>FEATURED PRODUCTS</h2>
+            <div className="d-flex align-items-center justify-content-center mb-3">
+              <h2 className="text-white h2-custom-prod-section p-3">
+                FEATURED PRODUCTS
+              </h2>
             </div>
           </Col>
           {photos.map((photo) => (
-            <Col xs={3} className="d-flex justify-content-between flex-column">
+            <Col
+              xs={12}
+              md={4}
+              className="d-flex justify-content-between flex-column mt-3"
+            >
               <PhotoCard
                 title={photo.title}
                 userName={photo.user?.firstName}
+                lastName={photo.user?.lastName}
                 photo={photo}
-                src="https://img.freepik.com/free-photo/closeup-scarlet-macaw-from-side-view-scarlet-macaw-closeup-head_488145-3540.jpg?semt=ais_wordcount_boost&w=740&q=80"
+                src={photo.image}
+                description={photo.description}
+                price={`${photo.price},00€`}
+                photographer={`${photo.user?.firstName} ${photo.user?.lastName}`}
+                showDelete={false}
               />
             </Col>
           ))}

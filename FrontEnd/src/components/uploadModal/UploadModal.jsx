@@ -84,16 +84,22 @@ const UploadModal = () => {
   };
   return (
     <>
-      <Container>
+      <Container className="w-100">
         <Row>
-          <Col className="d-flex justify-content-between align-items-center">
-            <div className="w-100">
-              <h3 className="h3-userpage-custom r">My Photo Gallery</h3>
-            </div>
-            <div>
-              <button className="btn btn-info" onClick={modalOn}>
-                Upload Photo
-              </button>
+          <Col
+            xs={12}
+            className="d-flex justify-content-between align-items-center p-0 "
+          >
+            <div className="w-100 ">
+              <h3 className="h3-modal-custom p-3   ">My Photo Gallery</h3>
+              <div className="d-flex align-items-end justify-content-end">
+                <button
+                  className="btn btn-custom-upload-modal"
+                  onClick={modalOn}
+                >
+                  Upload Photo
+                </button>
+              </div>
             </div>
 
             <Modal show={showModal} onHide={modalOff}>

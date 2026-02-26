@@ -4,7 +4,23 @@ import { Expand } from "lucide-react";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../../context/cartContext";
-const PhotoCard = ({ title, userName, src, photo, lastName }) => {
+import { PhotoContext } from "../../../context/photoContext";
+import { UserContext } from "../../../context/userContext";
+import UpdatePhoto from "../updatePhoto/updatePhoto";
+const PhotoCard = ({
+  showDelete,
+  id,
+  title,
+  userName,
+  src,
+  photo,
+  lastName,
+  description,
+  price,
+  photographer,
+}) => {
+  const { savedToken, userPhoto } = useContext(UserContext);
+  const { deletePhoto } = useContext(PhotoContext);
   const { addElement } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
 
@@ -25,32 +41,95 @@ const PhotoCard = ({ title, userName, src, photo, lastName }) => {
       <Container>
         <Row>
           <Col xs={12}>
-            <div className="bg-dark w-100 div-phto-card ">
-              <img src={src} className="photo-card-custom" />
-              <button className="button-icon-expand" onClick={modalOn}>
-                <Expand color="#8d8b8b" />
-              </button>
+            <div className="bg-dark w-100 div-phto-card h-100">
+              <div className="d-flex align-items-center justify-content-center div-image-container">
+                <img src={src} className="photo-card-custom" />
+                <button className="button-icon-expand" onClick={modalOn}>
+                  <Expand color="#8d8b8b" />
+                </button>
+              </div>
 
               <div className="d-flex justify-content-between">
                 <Link className="link-custom-card">
                   {`${userName} ${lastName}`}
                 </Link>
-                <button onClick={() => addPhotoToCart(photo)}>Add</button>
+                <button
+                  className="button-add-custom"
+                  onClick={() => addPhotoToCart(photo)}
+                >
+                  Add
+                </button>
               </div>
             </div>
             <Modal className="modal-opacity" show={showModal} onHide={modalOff}>
               <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
+                <Modal.Title className="modal-title-custom">
+                  {photo.title}
+                </Modal.Title>
               </Modal.Header>
-              <Modal.Body>
-                <div className="w-100">
-                  <img src={src} className="photo-card-custom" />
-                </div>
+              <Modal.Body className="w-100">
+                <Container className="w-100">
+                  <Row className="w-100">
+                    <Col
+                      xs={12}
+                      className="d-flex justify-content-between w-100"
+                    >
+                      <div className="w-100 m-3">
+                        <img src={src} className="photo-card-custom-modal" />
+                      </div>
+                      <div className="m-2 d-flex flex-column gap-3">
+                        <p>
+                          <span className="span-custom-modal">
+                            Description:
+                          </span>{" "}
+                          {photo.description}
+                        </p>
+                        <p>
+                          <span className="span-custom-modal">Price: </span>{" "}
+                          {photo.price} €
+                        </p>
+                        <p>
+                          <span className="span-custom-modal">
+                            Photographer:
+                          </span>{" "}
+                          {`${userName} ${lastName}`}
+                        </p>
+                        <p>
+                          <span className="span-custom-modal">Date:</span>{" "}
+                          {new Date(photo.createdAt).toLocaleDateString(
+                            "it-IT",
+                          )}
+                        </p>
+                      </div>
+                    </Col>
+                  </Row>
+                </Container>
               </Modal.Body>
-              <Modal.Footer>
-                <button className="btn button-custom" onClick={modalOff}>
-                  Close
-                </button>
+              <Modal.Footer className="d-flex align-items-center justify-content-between ">
+                <div>
+                  <button
+                    className="btn bg-success text-light "
+                    onClick={() => addPhotoToCart(photo)}
+                  >
+                    Add
+                  </button>
+                </div>
+
+                {showDelete && (
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <button
+                        className="btn btn-danger "
+                        onClick={() => deletePhoto(id, savedToken)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <div>
+                      <UpdatePhoto photo={photo} />
+                    </div>
+                  </div>
+                )}
               </Modal.Footer>
             </Modal>
           </Col>
