@@ -1,7 +1,5 @@
 import "./mainCustom.css";
 import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import ButtonCustom from "../buttonCustom/ButtonCustom";
 import { useNavigate } from "react-router-dom";
 
