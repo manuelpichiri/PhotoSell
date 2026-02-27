@@ -5,14 +5,14 @@ import FooterCustom from "../footer/FooterCustom";
 
 const InfoPage = () => {
   return (
-    <>
+    <div className="div-info-background">
       <NavbarCustom />
-      <Container fluid className="info-container py-5">
+      <Container fluid className="container-infopage py-5">
         <Container>
           <Row className="mb-5 text-center">
             <Col>
-              <h1 className="h1-custom-info">About PhotoSell</h1>
-              <p className="info-subtitle">
+              <h1 className="h1-custom-infopage">About PhotoSell</h1>
+              <p className="p-infopage">
                 A marketplace where photography meets opportunity.
               </p>
             </Col>
@@ -20,7 +20,7 @@ const InfoPage = () => {
 
           <Row className="mb-5">
             <Col>
-              <h3 className="h3-custom-info">What is PhotoSell</h3>
+              <h3 className="h3-custom-infopage">What is PhotoSell</h3>
               <p>
                 PhotoSell is an online platform that connects photographers with
                 people looking for high-quality and authentic images. Creators
@@ -32,8 +32,8 @@ const InfoPage = () => {
 
           <Row className="mb-5">
             <Col md={6}>
-              <h4 className="h4-custom-info">For Photographers</h4>
-              <ul className="ul-custom-info">
+              <h4 className="h4-custom-infopage">For Photographers</h4>
+              <ul className="ul-custom-infopage">
                 <li>Upload and manage your portfolio</li>
                 <li>Sell digital photos worldwide</li>
                 <li>Reach new audiences</li>
@@ -42,8 +42,8 @@ const InfoPage = () => {
             </Col>
 
             <Col md={6}>
-              <h4 className="h4-custom-info">For Buyers</h4>
-              <ul className="ul-custom-info">
+              <h4 className="h4-custom-infopage">For Buyers</h4>
+              <ul className="ul-custom-infopage">
                 <li>Discover original photography</li>
                 <li>Secure and fast purchases</li>
                 <li>Instant downloads</li>
@@ -54,8 +54,8 @@ const InfoPage = () => {
 
           <Row className="mb-5">
             <Col>
-              <h3 className="h3-custom-info">How PhotoSell Works</h3>
-              <ol className="ol-custom-info">
+              <h3 className="h3-custom-infopage">How PhotoSell Works</h3>
+              <ol className="ol-custom-infopage">
                 <li>Create your free account</li>
                 <li>Upload or explore photos</li>
                 <li>Buy or sell securely</li>
@@ -66,7 +66,7 @@ const InfoPage = () => {
 
           <Row className="mb-5">
             <Col>
-              <h3 className="h3-custom-info">Our Mission</h3>
+              <h3 className="h3-custom-infopage">Our Mission</h3>
               <p>
                 Our mission is to empower photographers by providing a simple
                 and accessible way to monetize creativity while helping users
@@ -77,7 +77,7 @@ const InfoPage = () => {
 
           <Row>
             <Col>
-              <h3 className="h3-custom-info">Security & Trust</h3>
+              <h3 className="h3-custom-infopage">Security & Trust</h3>
               <p>
                 PhotoSell ensures secure authentication and protected payment
                 systems to guarantee safe transactions for both photographers
@@ -88,7 +88,7 @@ const InfoPage = () => {
         </Container>
       </Container>
       <FooterCustom />
-    </>
+    </div>
   );
 };
 export default InfoPage;

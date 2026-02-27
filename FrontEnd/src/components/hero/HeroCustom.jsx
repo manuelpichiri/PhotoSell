@@ -13,6 +13,9 @@ const HeroCustom = () => {
           <Col xs={12}>
             <div className="w-100 h-50">
               <img
+                onContextMenu={(e) => e.preventDefault()}
+                draggable="false"
+                onDragStart={(e) => e.preventDefault()}
                 src="https://www.lookslikefilm.com/wp-content/uploads/2019/01/Heather-Jarrell.jpg"
                 className="img-custom-hero"
               ></img>
@@ -31,32 +34,77 @@ const HeroCustom = () => {
               className="mySwiper"
             >
               <SwiperSlide>
-                <img src="DSC07553.JPG" />
+                <img
+                  src="DSC07553.JPG"
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
+                />
               </SwiperSlide>
 
               <SwiperSlide>
-                <img src="DSC07566.JPG" />
+                <img
+                  src="DSC07566.JPG"
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
+                />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="DSC07569.JPG" />
+                <img
+                  src="DSC07569.JPG"
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
+                />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="DSC07575.JPG" />
+                <img
+                  src="DSC07575.JPG"
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
+                />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="DSC07613.jpg" />
+                <img
+                  src="DSC07613.jpg"
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
+                />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="DSC07618.jpg" />
+                <img
+                  src="DSC07618.jpg"
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
+                />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="DSC07670.jpg" />
+                <img
+                  src="DSC07670.jpg"
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
+                />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="DSC07697.jpg" />
+                <img
+                  src="DSC07697.jpg"
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
+                />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="DSC07565.JPG" />
+                <img
+                  src="DSC07565.JPG"
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
+                />
               </SwiperSlide>
             </Swiper>
           </Col>

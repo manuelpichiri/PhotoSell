@@ -24,6 +24,7 @@ const findAll = async (req, res) => {
     });
   }
 };
+
 const createUser = async (req, res) => {
   try {
     const { body } = req;

@@ -4,11 +4,9 @@ import { API_URL } from "../../config/api";
 import { useNavigate } from "react-router-dom";
 import ButtonCustom from "../buttonCustom/ButtonCustom";
 import { useFormErrors } from "../../hook/validationHook";
-import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 const FormRegistration = () => {
   const navigate = useNavigate();
-  const [show, setShow] = useState(true);
 
   const { values, errors, inputControl, validateInput } = useFormErrors({
     firstName: "",
@@ -21,19 +19,27 @@ const FormRegistration = () => {
 
   const registrer = async () => {
     try {
-      const response = await fetch(`${API_URL}/user`, {
+      const registerPromise = fetch(`${API_URL}/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
+      }).then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Registration failed");
+        }
+        return response.json();
       });
-      const data = await response.json();
+      const result = await toast.promise(registerPromise, {
+        loading: "Registration...",
+        success: "Registration was successful",
+        error: "Registration failed",
+      });
       navigate(`/`);
-      return data;
+      return result;
     } catch (error) {
       console.log(error.message);
-      alert(error.message);
     }
   };
   const submitOn = async (e) => {
@@ -44,20 +50,22 @@ const FormRegistration = () => {
   };
 
   return (
-    <>
+    <div className="div-background-registration-form">
       <Container>
         <Row>
           <Col xs={12}>
             <div className=" d-flex align-items-center justify-content-center mb-4 ">
-              <div className=" div-custom">
-                <h1 className="h1-custom text-white">Registration</h1>
-                <span className="mt-1 span-custom text-white">
-                  CLICK FOR YOUR SHOOT
-                </span>
+              <div className=" div-custom ">
+                <div className="d-flex align-items-center justify-content-center">
+                  <h1 className="text-white">Registration </h1>
+                </div>
+                <div className="d-flex align-items-center justify-content-center">
+                  <h5 className="text-white">CLICK FOR YOUR SHOOT</h5>
+                </div>
               </div>
             </div>
           </Col>
-          <Col>
+          <Col xs={12} className="p-3">
             <form className="d-grid" onSubmit={submitOn}>
               <InputCustom
                 name="firstName"
@@ -156,7 +164,7 @@ const FormRegistration = () => {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 };
 export default FormRegistration;

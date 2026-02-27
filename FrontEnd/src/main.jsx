@@ -1,7 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import "rc-slider/assets/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fontsource/plus-jakarta-sans";
+import "rc-tooltip/assets/bootstrap.css";
 import "./index.css";
 import { UserProvider } from "../context/userContext.jsx";
 import { PhotoProvider } from "../context/photoContext.jsx";

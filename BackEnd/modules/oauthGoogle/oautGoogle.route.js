@@ -5,12 +5,18 @@ const oauthGoogleController = require("./oautGoogle.controller");
 
 oauth.get(
   "/google",
-  passport.authenticate("google", { scope: ["profile"] }),
-  oauthGoogleController.auth,
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+    session: false,
+  }),
 );
+
 oauth.get(
   "/google/callback",
-  passport.authenticate("google", { failureRedirect: "/" }),
+  passport.authenticate("google", {
+    failureRedirect: "/",
+    session: false,
+  }),
   oauthGoogleController.manageOauthCallback,
 );
 

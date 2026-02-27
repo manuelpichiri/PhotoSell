@@ -1,7 +1,15 @@
+.div-custom-footer-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
 .div-custom-footer {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 40px;
 }
 
 .div-custom-footer :nth-child(n) {

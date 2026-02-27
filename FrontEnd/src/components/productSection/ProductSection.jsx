@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from "react";
 import PhotoCard from "../photoCard/PhotoCard";
 const ProductSection = () => {
   const { photos } = useContext(PhotoContext);
-  console.log(photos);
 
   useEffect(() => {}, []);
 
@@ -22,6 +21,7 @@ const ProductSection = () => {
           </Col>
           {photos.map((photo) => (
             <Col
+              key={photo._id}
               xs={12}
               md={4}
               className="d-flex justify-content-between flex-column mt-3"

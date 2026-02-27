@@ -15,6 +15,21 @@ const getUsers = async () => {
   };
 };
 
+const findOrCreateGoogleUser = async (googleUser) => {
+  if (!googleUser.email) throw new Error("Missing email from Google");
+
+  let user = await userSchema.findOne({ email: googleUser.email });
+
+  if (!user) {
+    user = await userSchema.create({
+      ...googleUser,
+      provider: "google",
+    });
+  }
+
+  return user;
+};
+
 const getSingleUser = async (id) => {
   const user = await userSchema.findById(id).populate("photo");
   return user;
@@ -49,4 +64,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getSingleUser,
+  findOrCreateGoogleUser,
 };

@@ -5,9 +5,12 @@ import PhotoCard from "../photoCard/PhotoCard";
 import FooterCustom from "../footer/FooterCustom";
 import { API_URL } from "../../config/api";
 import NavbarCustom from "../navigation/NavbarCustom";
+import Slider from "rc-slider";
+import Tooltip from "rc-tooltip";
 const SearchingPage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [maxPrice, setMaxPrice] = useState(999);
+  const [minPrice, setMinPrice] = useState(0);
   const [photos, setPhotos] = useState([]);
 
   const [photoByTitle, setPhotoByTitle] = useState([]);
@@ -99,18 +102,29 @@ const SearchingPage = () => {
                       <label for="range1" className="form-label">
                         Price
                       </label>
-                      <input
-                        type="range"
-                        className="form-range"
-                        id="range1"
-                        min="0"
-                        max="999"
-                        value={maxPrice}
-                        onChange={(e) => setMaxPrice(Number(e.target.value))}
-                      ></input>
-                      <output for="range4" id="rangeValue" aria-hidden="true">
-                        {maxPrice}
-                      </output>
+                      <Slider
+                        range
+                        min={0}
+                        max={999}
+                        value={[minPrice, maxPrice]}
+                        onChange={(value) => {
+                          setMinPrice(value[0]);
+                          setMaxPrice(value[1]);
+                        }}
+                        handleRender={(node, props) => (
+                          <Tooltip
+                            overlay={`${props.value}€`}
+                            visible
+                            placement="top"
+                            key={props.index}
+                          >
+                            {node}
+                          </Tooltip>
+                        )}
+                      />
+                      <p className="mt-2">
+                        {minPrice}€ - {maxPrice}€
+                      </p>
                     </div>
                   </form>
                 </Offcanvas.Body>
@@ -147,7 +161,7 @@ const SearchingPage = () => {
               className="d-flex align-items-center justify-content-center  flex-grow-1 "
             >
               <div className="d-flex align-items-center justify-content-center w-100 ">
-                <h1 className="text-white">Nothing was found...</h1>
+                <h1 className="text-white">No Results found...</h1>
               </div>
             </Col>
           ) : (

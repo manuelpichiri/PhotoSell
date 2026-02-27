@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import "./userPage.css";
-
 import { Container, Row, Col } from "react-bootstrap";
 import { UserContext } from "../../../context/userContext";
 import { PhotoContext } from "../../../context/photoContext";
@@ -9,7 +8,9 @@ import UploadModal from "../uploadModal/UploadModal";
 import NavbarCustom from "../navigation/NavbarCustom";
 import PhotoCard from "../photoCard/PhotoCard";
 import FooterCustom from "../footer/FooterCustom";
+import { useParams } from "react-router-dom";
 const UserPage = () => {
+  const { id } = useParams(); //condizionale per mostrare id
   const { user } = useContext(UserContext);
 
   const { userPhoto, getAllPhotoByUserId } = useContext(PhotoContext);
@@ -26,6 +27,7 @@ const UserPage = () => {
     if (!user || !user._id) return;
 
     getAllPhotoByUserId(user._id);
+    ageCalculator();
   }, [user]);
 
   return (
@@ -36,6 +38,9 @@ const UserPage = () => {
           <Col xs={12}>
             <div>
               <img
+                onContextMenu={(e) => e.preventDefault()}
+                draggable="false"
+                onDragStart={(e) => e.preventDefault()}
                 className="img-hero-userpage"
                 src="https://cdn.pixabay.com/photo/2017/10/20/10/58/elephant-2870777_1280.jpg"
               />
@@ -46,6 +51,9 @@ const UserPage = () => {
             <div className="d-flex justify-content-between align-items-center ">
               <div className="div-avatar-img-userpage ms-3 d-flex gap-3">
                 <img
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
                   className="img-userpage"
                   src="https://cdn.pixabay.com/photo/2017/10/20/10/58/elephant-2870777_1280.jpg"
                 />
@@ -65,10 +73,24 @@ const UserPage = () => {
               <h3 className="p-0 m-0 text-h-custom">My Info</h3>
             </div>
             <div className="div-info">
-              <p>Full Name: {`${user.firstName} ${user.lastName}`}</p>
-              <p>Email: {user.email}</p>
-              <p>Age: {ageCalculator(user.dateOfBirth)}</p>
-              <p>Country: {user.country}</p>
+              <p>
+                <span className="span-custom-user-page">Full Name: </span>{" "}
+                {`${user.firstName} ${user.lastName}`}
+              </p>
+              <p>
+                {" "}
+                <span className="span-custom-user-page">Email: </span>{" "}
+                {user.email}
+              </p>
+              <p>
+                <span className="span-custom-user-page"> Age: </span>{" "}
+                {ageCalculator(user.dateOfBirth)}
+              </p>
+              <p>
+                {" "}
+                <span className="span-custom-user-page">Country: </span>{" "}
+                {user.country}
+              </p>
             </div>
           </Col>
         </Row>
