@@ -3,10 +3,10 @@ import { Container, Row, Col, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 const FooterCustom = () => {
   return (
-    <Container fluid className=" bg-dark  container-footer ">
+    <Container fluid className=" bg-dark container-footer mt-3">
       <Row className="d-flex justify-content-center align-items-center">
         <Col xs={12}>
-          <div className="div-custom-footer">
+          <div className="div-custom-footer-icon ">
             <a href="https://x.com/">
               {" "}
               <img
@@ -35,7 +35,7 @@ const FooterCustom = () => {
 
         <Col xs={12} className="mt-3 bg-dark">
           <div className="div-custom-footer">
-            <Link to="/homepage" onClick={() => window.scrollTo(0, 0)}>
+            <Link to="/" onClick={() => window.scrollTo(0, 0)}>
               Home
             </Link>
             <Link to="/about-us">About</Link>

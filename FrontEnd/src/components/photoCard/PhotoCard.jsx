@@ -23,6 +23,7 @@ const PhotoCard = ({
   const { deletePhoto } = useContext(PhotoContext);
   const { addElement } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
+  const isLogged = Boolean(savedToken); //se esiste il token allora logged è true
 
   const addPhotoToCart = () => {
     addElement(photo);
@@ -43,7 +44,13 @@ const PhotoCard = ({
           <Col xs={12}>
             <div className="bg-dark w-100 div-phto-card h-100">
               <div className="d-flex align-items-center justify-content-center div-image-container">
-                <img src={src} className="photo-card-custom" />
+                <img
+                  src={src}
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
+                  className="photo-card-custom"
+                />
                 <button className="button-icon-expand" onClick={modalOn}>
                   <Expand color="#8d8b8b" />
                 </button>
@@ -53,15 +60,22 @@ const PhotoCard = ({
                 <Link className="link-custom-card">
                   {`${userName} ${lastName}`}
                 </Link>
-                <button
-                  className="button-add-custom"
-                  onClick={() => addPhotoToCart(photo)}
-                >
-                  Add
-                </button>
+                {isLogged && (
+                  <button
+                    className="button-add-custom"
+                    onClick={() => addPhotoToCart(photo)}
+                  >
+                    Add
+                  </button>
+                )}
               </div>
             </div>
-            <Modal className="modal-opacity" show={showModal} onHide={modalOff}>
+            <Modal
+              className="modal-opacity"
+              show={showModal}
+              onHide={modalOff}
+              size="xl"
+            >
               <Modal.Header closeButton>
                 <Modal.Title className="modal-title-custom">
                   {photo.title}
@@ -71,30 +85,41 @@ const PhotoCard = ({
                 <Container className="w-100">
                   <Row className="w-100">
                     <Col
-                      xs={12}
+                      xs={6}
                       className="d-flex justify-content-between w-100"
                     >
-                      <div className="w-100 m-3">
-                        <img src={src} className="photo-card-custom-modal" />
+                      <div className="w-100 m-3 div-img-relative ">
+                        <img
+                          src={src}
+                          onContextMenu={(e) => e.preventDefault()}
+                          draggable="false"
+                          onDragStart={(e) => e.preventDefault()}
+                          className="photo-card-custom-modal"
+                        />
+                        <div className="no-save"></div>
                       </div>
-                      <div className="m-2 d-flex flex-column gap-3">
-                        <p>
-                          <span className="span-custom-modal">
+                    </Col>
+                    <Col xs={6}>
+                      <div className="m-2 d-flex flex-column gap-3 w50">
+                        <p className="d-flex align-items-center gap-2 p-custom-photocard">
+                          <span className="span-custom-modal ">
                             Description:
                           </span>{" "}
                           {photo.description}
                         </p>
-                        <p>
+                        <p className="d-flex align-items-center gap-2 p-custom-photocard">
                           <span className="span-custom-modal">Price: </span>{" "}
-                          {photo.price} €
+                          {(photo.price / 100).toFixed(2)} €
                         </p>
-                        <p>
+                        <p className="d-flex align-items-center gap-2 p-custom-photocard">
                           <span className="span-custom-modal">
                             Photographer:
                           </span>{" "}
-                          {`${userName} ${lastName}`}
+                          <Link
+                            to={`/userpage/${photo.user._id}`}
+                          >{`${userName} ${lastName}`}</Link>
                         </p>
-                        <p>
+                        <p className="d-flex align-items-center gap-2 p-custom-photocard">
                           <span className="span-custom-modal">Date:</span>{" "}
                           {new Date(photo.createdAt).toLocaleDateString(
                             "it-IT",
@@ -106,14 +131,16 @@ const PhotoCard = ({
                 </Container>
               </Modal.Body>
               <Modal.Footer className="d-flex align-items-center justify-content-between ">
-                <div>
-                  <button
-                    className="btn bg-success text-light "
-                    onClick={() => addPhotoToCart(photo)}
-                  >
-                    Add
-                  </button>
-                </div>
+                {isLogged && (
+                  <div>
+                    <button
+                      className="btn bg-success text-light "
+                      onClick={addPhotoToCart}
+                    >
+                      Add
+                    </button>
+                  </div>
+                )}
 
                 {showDelete && (
                   <div className="d-flex align-items-center">

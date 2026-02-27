@@ -3,9 +3,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Camera, Image, Users, Globe } from "lucide-react";
 import NavbarCustom from "../navigation/NavbarCustom";
 import FooterCustom from "../footer/FooterCustom";
+
 const AboutUsPage = () => {
   return (
-    <>
+    <div className="about-div-background">
       <NavbarCustom />
       <Container fluid className="about-container py-5">
         <Container>
@@ -39,7 +40,7 @@ const AboutUsPage = () => {
 
             <Col md={6}>
               <img
-                src="../../../public/americaMountain.jpg"
+                src="americaMountain.jpg"
                 alt="photography"
                 className="about-image"
               />
@@ -59,7 +60,7 @@ const AboutUsPage = () => {
         </Container>
       </Container>
       <FooterCustom />
-    </>
+    </div>
   );
 };
 export default AboutUsPage;

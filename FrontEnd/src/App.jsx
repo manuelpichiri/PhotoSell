@@ -24,6 +24,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<Homepage />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/oauth-success" element={<OAuthSuccess />} />
           <Route path="/info" element={<InfoPage />}></Route>
           <Route path="/about-us" element={<AboutUsPage />}></Route>
           <Route path="/card" element={<PhotoCard />}></Route>
@@ -35,6 +36,7 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />}></Route>
           <Route path="/search" element={<SearchingPage />}></Route>
           <Route path="/userPage" element={<UserPage />}></Route>
+          <Route path="/userPage/:id" element={<UserPage />}></Route>
           <Route path="/registration" element={<Registration />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

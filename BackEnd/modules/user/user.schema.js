@@ -28,12 +28,25 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       min: 8,
-      required: true,
+
+      required: function () {
+        return this.provider !== "google";
+      },
+
       validate: {
-        validator: (value) => passwordRegex.test(value),
+        validator: function (value) {
+          if (this.provider === "google") return true; // se l'utente arriva da google skip validazione password
+
+          return passwordRegex.test(value);
+        },
         message:
           "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character",
       },
+    },
+    provider: {
+      type: String,
+      enum: ["local", "google"],
+      default: "local",
     },
     age: {
       type: Number,
@@ -74,15 +87,11 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", async function () {
-  if (!this.isModified("password")) {
-    return;
-  }
-  try {
-    const salt = await bcrypt.genSalt(15);
-    this.password = await bcrypt.hash(this.password, salt);
-  } catch (error) {
-    next(error);
-  }
+  if (!this.isModified("password")) return;
+  if (this.provider === "google" && !this.password) return;
+
+  const salt = await bcrypt.genSalt(15);
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
 userSchema.pre("findOneAndUpdate", async function (next) {
@@ -92,7 +101,7 @@ userSchema.pre("findOneAndUpdate", async function (next) {
       return next();
     }
     const plainPassword = update.password ?? update.$set.password;
-    if (!plainPassword) return;
+    if (!plainPassword) return next();
 
     const salt = await bcrypt.genSalt(15);
     const hashed = await bcrypt.hash(plainPassword, salt);

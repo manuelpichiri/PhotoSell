@@ -70,6 +70,10 @@ p {
   color: #b7c4c2;
 }
 
+.span-custom-user-page {
+  font-weight: 900;
+}
+
 @media (max-width: 425px) {
   .img-userpage {
     display: none;

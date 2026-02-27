@@ -18,6 +18,9 @@ const MainCustom = () => {
               </div>
               <div className="w-100  ">
                 <img
+                  onContextMenu={(e) => e.preventDefault()}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
                   src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm90b3xlbnwwfHwwfHx8MA%3D%3D"
                   className="img-custom-main "
                 />
@@ -47,6 +50,9 @@ const MainCustom = () => {
             </div>
             <div className=" w-75 d-flex justify-content-center align-items-center h-50  ">
               <img
+                onContextMenu={(e) => e.preventDefault()}
+                draggable="false"
+                onDragStart={(e) => e.preventDefault()}
                 src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg"
                 className="img-custom-main "
               />

@@ -16,6 +16,7 @@ const ModalCart = ({ className }) => {
   const modalOff = () => {
     setShow(false);
   };
+  console.log(cart);
 
   return (
     <>
@@ -33,7 +34,10 @@ const ModalCart = ({ className }) => {
           <Modal.Body className="w-100 ">
             {cart.map((product) => {
               return (
-                <div className="d-flex align-items-center w-100 h-100 mb-3">
+                <div
+                  className="d-flex align-items-center w-100 h-100 mb-3"
+                  key={product._id}
+                >
                   <div className="w-50 h-50">
                     <img src={product.image} className="img-cart-product"></img>
                   </div>

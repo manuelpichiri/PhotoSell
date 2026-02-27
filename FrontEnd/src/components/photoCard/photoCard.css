@@ -72,3 +72,19 @@
   font-size: 32px;
   color: brown;
 }
+
+.div-img-relative {
+  position: relative;
+}
+
+.no-save {
+  position: "absolute";
+  top: 0;
+  left: 0;
+  width: "100%";
+  height: "100%";
+}
+
+.p-custom-photocard {
+  white-space: nowrap;
+}

@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { UserContext } from "../../../context/userContext";
 import { Container, Row, Col, Modal } from "react-bootstrap";
+import toast from "react-hot-toast";
 const UploadModal = () => {
   const { user } = useContext(UserContext);
   const token = localStorage.getItem("token");
@@ -19,20 +20,49 @@ const UploadModal = () => {
     setShowModal(false);
   };
 
+  const onFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+
+    if (!selectedFile) return;
+
+    const allowedTypes = ["image/jpeg", "image/jpg"];
+
+    if (!allowedTypes.includes(selectedFile.type)) {
+      toast.error("Only JPG images allowed");
+      return;
+    }
+
+    setFile(selectedFile);
+  };
+
   const uploadPhoto = async () => {
     try {
       const data = new FormData();
       data.append("photo", file);
-      const response = await fetch(`${API_URL}/user/${decoded.id}/cloud`, {
+
+      const uploadPromise = fetch(`${API_URL}/user/${decoded.id}/cloud`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
         },
         body: data,
+      }).then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Upload failed");
+        }
+        return response.json();
       });
-      return await response.json();
+
+      const result = await toast.promise(uploadPromise, {
+        loading: "Uploading photo...",
+        success: "Upload successful",
+        error: "Upload failed",
+      });
+      modalOff();
+      return result;
     } catch (error) {
       console.log(error.message);
+      return null;
     }
   };
 
@@ -45,7 +75,6 @@ const UploadModal = () => {
         return;
       }
 
-      console.log(decoded.id);
       try {
         const photoFormData = {
           user: decoded.id,
@@ -53,7 +82,7 @@ const UploadModal = () => {
           category: formData.category,
           description: formData.description,
           title: formData.title,
-          price: Number(formData.price),
+          price: Math.round(Number(formData.price) * 100),
         };
         const response = await fetch(`${API_URL}/photo`, {
           method: "POST",
@@ -63,8 +92,8 @@ const UploadModal = () => {
           body: JSON.stringify(photoFormData),
         });
         return await response.json();
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log(error.message);
       }
     }
   };
@@ -137,13 +166,15 @@ const UploadModal = () => {
                         className="input-custom-upload-modal"
                         type="number"
                         name="price"
+                        step="0.01"
                         placeholder="price"
                         onChange={onChangeInput}
                       />
                       <input
                         className="input-custom-upload-modal"
                         type="file"
-                        onChange={onChangeInputFile}
+                        accept=".jpg,.jpeg,image/jpeg"
+                        onChange={onFileChange}
                       />
 
                       <button type="submit">Carica</button>

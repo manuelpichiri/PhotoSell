@@ -10,11 +10,15 @@ import ModalCart from "../modalCart/ModalCart";
 import { UserContext } from "../../../context/userContext";
 import { useContext } from "react";
 const NavbarCustom = () => {
-  const { logged } = useContext(UserContext);
+  const { logged, setLogged, setUser, setSavedToken, user } =
+    useContext(UserContext);
   const navigate = useNavigate();
-  console.log(logged);
+
   const logout = () => {
     localStorage.removeItem("token");
+    setSavedToken("");
+    setUser(null);
+    setLogged(false);
     navigate("/login");
   };
 
@@ -50,6 +54,12 @@ const NavbarCustom = () => {
               )}
 
               <div className="user-menu">
+                {user.role === "admin" && (
+                  <Link to="/admin" className="link-admin-page">
+                    Admin
+                  </Link>
+                )}
+
                 <ModalCart className="modal-cart-navbar" />
                 <User size={32} />
                 <NavDropdown id="basic-nav-dropdown">

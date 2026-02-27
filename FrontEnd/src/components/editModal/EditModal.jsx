@@ -1,61 +1,122 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./editModal.css";
 import { API_URL } from "../../config/api";
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
 import { UserContext } from "../../../context/userContext";
 import InputCustom from "../inputCustom/InputCustom";
-
+import toast from "react-hot-toast";
+import { useFormErrors } from "../../hook/validationHook";
 const EditModal = ({ className }) => {
   const [showModal, setShowModal] = useState(false);
   const { token, user, setUser } = useContext(UserContext);
   const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
+
+  const validateUser = (values) => {
+    const errors = {};
+
+    if (!values.firstName || values.firstName.trim().length < 2) {
+      errors.firstName = "Nome troppo corto";
+    }
+    if (!values.lastName || values.lastName.trim().length < 2) {
+      errors.lastName = "Cognome troppo corto";
+    }
+    if (!values.country) {
+      errors.country = "Country obbligatoria";
+    }
+
+    const dateStr = values.dateOfBirth;
+    if (!dateStr) {
+      errors.dateOfBirth = "La data è richiesta";
+    }
+
+    return errors;
+  };
 
   const [userValue, setUserValue] = useState({
-    firstName: user.firstName || "",
-    lastName: user.lastName || "",
-    dateOfBirth: user.dateOfBirth || "",
-    country: user.country || "",
+    firstName: "",
+    lastName: "",
+    dateOfBirth: "",
+    country: "",
   });
 
-  const modalOn = () => {
-    setShowModal(true);
-  };
+  const modalOn = () => setShowModal(true);
+  const modalOff = () => setShowModal(false);
 
-  const modalOff = () => {
-    setShowModal(false);
-  };
+  useEffect(() => {
+    if (!showModal) return;
+
+    setUserValue({
+      firstName: user?.firstName || "",
+      lastName: user?.lastName || "",
+      dateOfBirth: user?.dateOfBirth
+        ? String(user.dateOfBirth).slice(0, 10)
+        : "",
+      country: user?.country || "",
+    });
+
+    setErrors({});
+  }, [showModal, user]);
 
   const updateUser = async () => {
-    console.log(user._id);
-    try {
-      const response = await fetch(`${API_URL}/user/${user._id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(userValue),
-      });
-      const data = await response.json();
+    const updateUserPromise = fetch(`${API_URL}/user/${user._id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(userValue),
+    }).then(async (response) => {
+      let data;
+      try {
+        data = await response.json();
+      } catch (error) {
+        console.log("Response is not json");
+        data = null;
+      }
 
-      setUser(data.user.user);
+      if (!response.ok) {
+        throw new Error("Update failed");
+      }
       return data;
-    } catch (error) {
-      console.log(error.message);
-    }
+    });
+
+    return toast.promise(updateUserPromise, {
+      loading: "Updating profile...",
+      success: "Profile updated",
+      error: (err) => err.message || "Update failed",
+    });
   };
 
   const submitOn = async (e) => {
     e.preventDefault();
-    const validation = validateUser({
-      ...userValue,
-      firstName: user.firstName,
-    });
+
+    if (!user || !user._id) return;
+
+    const validation = validateUser(userValue);
     setErrors(validation);
+    if (Object.keys(validation).length > 0) return; //object key prende la proprietà dell'oggetto, controlla che non ci siano errori nel form se ci sono fa return
 
-    if (Object.keys(validation).length > 0) return;
+    try {
+      setSaving(true);
 
-    await updateUser();
+      const result = await updateUser();
+      if (!result) return;
+
+      let updatedUser;
+      if (result.user && result.user.user) updatedUser = result.user.user;
+      else if (result.user) updatedUser = result.user;
+      else updatedUser = result;
+
+      if (!updatedUser) return;
+
+      setUser(updatedUser);
+      modalOff();
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -117,17 +178,13 @@ const EditModal = ({ className }) => {
                       setUserValue({ ...userValue, country: e.target.value });
                     }}
                   ></InputCustom>
-                  <Button variant="primary" type="submit" onClick={modalOff}>
-                    Save changes
-                  </Button>
+                  <div className="d-flex align-items-center justify-content-center">
+                    <Button variant="primary" type="submit">
+                      Save changes
+                    </Button>
+                  </div>
                 </form>
               </Modal.Body>
-
-              <Modal.Footer>
-                <Button variant="secondary" onClick={modalOff}>
-                  Close
-                </Button>
-              </Modal.Footer>
             </Modal.Dialog>
           </Modal>
         </Col>

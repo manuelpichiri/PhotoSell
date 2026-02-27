@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { API_URL } from "../../config/api";
 import ButtonCustom from "../buttonCustom/ButtonCustom";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/userContext";
 const FormLogin = () => {
@@ -19,26 +20,32 @@ const FormLogin = () => {
   const login = async () => {
     try {
       setLoginError("");
-      const response = await fetch(`${API_URL}/auth/login`, {
+      const loginPromise = fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userValue),
+      }).then(async (response) => {
+        if (!response.ok) {
+          setLoginError("Email o password non corretti");
+          throw new Error("login failed");
+        }
+        return response.json();
       });
-      const data = await response.json();
-      if (!response.ok) {
-        setLoginError("Email o password non corretti");
-        return;
-      }
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        setLogged(true);
+      const result = await toast.promise(loginPromise, {
+        //toast promise vuole una fetch non risolta, quindi senza await
+        loading: "Login...",
+        success: "Login was successful",
+        error: "Login failed",
+      });
 
+      if (result?.token) {
+        localStorage.setItem("token", result.token);
+        setLogged(true);
         navigate(`/`);
-      } else {
-        return;
       }
+      return result;
     } catch (error) {
       console.log("Errore login", error.message);
     }

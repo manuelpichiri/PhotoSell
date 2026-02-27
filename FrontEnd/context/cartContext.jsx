@@ -1,9 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart") ?? []),
+  );
 
   const addElement = (photo) => {
     setCart((cart) => {
@@ -16,10 +19,11 @@ export const CartProvider = ({ children }) => {
             //metto a confronto l'id della photo che arriva come parametro a quello presente nel cart
             return { ...item, qty: item.qty + 1 }; // se è lo stesso aumento la quantità altrimento lo lascio com'è
           }
+          toast.success("Added to cart");
           return item;
         });
       }
-
+      toast.success("Added to cart");
       return [...cart, { ...photo, qty: 1 }]; // se non esiste lo aggiungo
     });
   };
@@ -35,12 +39,16 @@ export const CartProvider = ({ children }) => {
           ) // creo una copia dell'oggetto con lo stesso id e diminuisco la quantità di 1
           .filter((item) => item.qty > 0), // tengo solo le photo che hanno la quantità maggiore a 0 se sono a 0 le tolgo
     );
+    toast.success("Removed from cart");
   };
 
   const total = cart.reduce(
     (acc, item) => acc + (Number(item.price) || 0) * (Number(item.qty) || 0),
     0,
   );
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <CartContext.Provider

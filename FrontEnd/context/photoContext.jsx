@@ -36,6 +36,7 @@ export const PhotoProvider = ({ children }) => {
       });
       setUserPhoto((prev) => prev.filter((photo) => photo._id !== id)); //prev prende quello che c'è nell'array e lo riutilizza per creare uno nuovo
       setPhotos((prev) => prev.filter((photo) => photo._id !== id));
+      toast.success("Deleted photo");
     } catch (error) {
       console.log(error.message);
     }

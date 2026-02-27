@@ -66,6 +66,7 @@ export const UserProvider = ({ children }) => {
         setUsers,
         logged,
         setLogged,
+        setSavedToken,
       }}
     >
       {children}
