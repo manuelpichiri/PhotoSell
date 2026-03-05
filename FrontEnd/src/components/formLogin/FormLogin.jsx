@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/userContext";
 const FormLogin = () => {
-  const { logged, setLogged } = useContext(UserContext);
+  const { setSavedToken } = useContext(UserContext);
 
   const [loginError, setLoginError] = useState("");
   const [userValue, setUserValue] = useState({
@@ -42,7 +42,7 @@ const FormLogin = () => {
 
       if (result?.token) {
         localStorage.setItem("token", result.token);
-        setLogged(true);
+        setSavedToken(result.token);
         navigate(`/`);
       }
       return result;

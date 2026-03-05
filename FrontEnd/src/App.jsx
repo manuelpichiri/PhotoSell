@@ -16,6 +16,8 @@ import OrderPage from "./components/orderPage/orderPage";
 import { Toaster } from "react-hot-toast";
 import AboutUsPage from "./components/aboutUsPage/AboutUsPage";
 import InfoPage from "./components/infoPage/InfoPage";
+import OauthSuccess from "./components/oauthSucess/OauthSuccess";
+import UserPageView from "./components/userPageView/UserPageView";
 function App() {
   return (
     <BrowserRouter>
@@ -24,7 +26,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<Homepage />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/oauth-success" element={<OAuthSuccess />} />
+          <Route path="/oauth-success" element={<OauthSuccess />} />
           <Route path="/info" element={<InfoPage />}></Route>
           <Route path="/about-us" element={<AboutUsPage />}></Route>
           <Route path="/card" element={<PhotoCard />}></Route>
@@ -36,7 +38,7 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />}></Route>
           <Route path="/search" element={<SearchingPage />}></Route>
           <Route path="/userPage" element={<UserPage />}></Route>
-          <Route path="/userPage/:id" element={<UserPage />}></Route>
+          <Route path="/user/:id" element={<UserPageView />}></Route>
           <Route path="/registration" element={<Registration />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

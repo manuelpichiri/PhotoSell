@@ -6,8 +6,8 @@ import { Camera } from "lucide-react";
 import { Link } from "react-router-dom";
 import OauthLogin from "../oauthLogin/OauthLogin";
 const Login = () => {
-  // se c'è il token nell'url query param token controlla se è validalo e salvalo nel local storage
   return (
+    // se c'è il token nell'url query param token controlla se è validalo e salvalo nel local storage
     <>
       <Container
         fluid
