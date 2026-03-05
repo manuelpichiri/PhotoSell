@@ -2,7 +2,7 @@ import "./photoCard.css";
 import { Container, Row, Col, Modal } from "react-bootstrap";
 import { Expand } from "lucide-react";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../../../context/cartContext";
 import { PhotoContext } from "../../../context/photoContext";
 import { UserContext } from "../../../context/userContext";
@@ -19,12 +19,19 @@ const PhotoCard = ({
   price,
   photographer,
 }) => {
+  const navigate = useNavigate();
   const { savedToken, userPhoto } = useContext(UserContext);
   const { deletePhoto } = useContext(PhotoContext);
   const { addElement } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
   const isLogged = Boolean(savedToken); //se esiste il token allora logged è true
 
+  const goToProfile = () => {
+    const ownerId =
+      typeof photo.user === "object" ? photo.user._id : photo.user;
+
+    navigate(`/user/${ownerId}`);
+  };
   const addPhotoToCart = () => {
     addElement(photo);
   };
@@ -57,7 +64,7 @@ const PhotoCard = ({
               </div>
 
               <div className="d-flex justify-content-between">
-                <Link className="link-custom-card">
+                <Link className="link-custom-card" onClick={goToProfile}>
                   {`${userName} ${lastName}`}
                 </Link>
                 {isLogged && (
@@ -116,7 +123,7 @@ const PhotoCard = ({
                             Photographer:
                           </span>{" "}
                           <Link
-                            to={`/userpage/${photo.user._id}`}
+                            to={`/user/${photo.user._id || photo.user}`}
                           >{`${userName} ${lastName}`}</Link>
                         </p>
                         <p className="d-flex align-items-center gap-2 p-custom-photocard">

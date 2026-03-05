@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ModalCart from "../modalCart/ModalCart";
 import { UserContext } from "../../../context/userContext";
 import { useContext } from "react";
+import { CartContext } from "../../../context/cartContext";
 const NavbarCustom = () => {
   const { logged, setLogged, setUser, setSavedToken, user } =
     useContext(UserContext);
@@ -16,6 +17,7 @@ const NavbarCustom = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+
     setSavedToken("");
     setUser(null);
     setLogged(false);
